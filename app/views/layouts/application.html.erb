@@ -15,8 +15,8 @@
     <header>
       <nav>
         <% if user_signed_in? %>
-          <strong>Login account : <%= current_user.email %></strong>
-          <strong><%= link_to "Home", root_path %></strong>
+          <strong>Login account : <%= current_user.name %></strong>
+          <strong><%= link_to "投稿一覧", root_path %></strong>
           <%= link_to 'プロフィール変更', edit_user_registration_path %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
         <% else %>
