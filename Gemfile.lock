@@ -93,12 +93,26 @@ GEM
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
     ffi (1.15.0)
+    gimei (0.5.1)
+      romaji
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
+    kaminari (1.2.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.1)
+      kaminari-activerecord (= 1.2.1)
+      kaminari-core (= 1.2.1)
+    kaminari-actionview (1.2.1)
+      actionview
+      kaminari-core (= 1.2.1)
+    kaminari-activerecord (1.2.1)
+      activerecord
+      kaminari-core (= 1.2.1)
+    kaminari-core (1.2.1)
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -169,6 +183,8 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    romaji (0.2.4)
+      rake (>= 0.8.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -248,7 +264,9 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   factory_bot_rails
+  gimei
   jbuilder (~> 2.7)
+  kaminari
   listen (~> 3.3)
   mysql2 (~> 0.5)
   pg (= 1.1.4)
