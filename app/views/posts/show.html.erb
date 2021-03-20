@@ -1,2 +1,6 @@
 <h1>投稿詳細</h1>
+<%= link_to @post.user.name, @post.user %>
 <%= @post.impression %>
+<% if current_user == @post.user %>
+  <%= link_to "delete", post_path(@post.id), method: :delete, data: { confirm: "You sure?" } %>
+<% end %>
