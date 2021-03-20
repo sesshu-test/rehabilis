@@ -117,4 +117,16 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.action_mailer.default_url_options = { host: 'peaceful-garden-75472.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    enable_starttls_auto: true,
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'hiro58889@gmail.com',
+    password:             'vnyolehuvsbhbudm',
+    authentication:       :plain
+  }
 end
