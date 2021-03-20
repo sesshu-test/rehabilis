@@ -14,11 +14,10 @@
   
     <header>
       <nav>
+        <%= link_to 'rehabilis', root_path %>
         <% if user_signed_in? %>
-          <strong>Login account : <%= current_user.name %></strong>
-          <%= link_to '投稿一覧', root_path %>
+          <strong>Login account : <%= link_to current_user.name, current_user %></strong>
           <%= link_to 'ユーザー一覧', users_path %>
-          <%= link_to 'プロフィール変更', edit_user_registration_path %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to 'サインアップ', new_user_registration_path %>
