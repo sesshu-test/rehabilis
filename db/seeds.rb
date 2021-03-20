@@ -14,3 +14,10 @@ User.create!(name:  "サンプル",
     password: password,
     confirmed_at: Time.now)
 end
+
+# ユーザーの一部を対象にマイクロポストを生成する
+users = User.order(:created_at).take(6)
+50.times do
+  impression = Faker::Lorem.sentence(word_count: 5)
+  users.each { |user| user.posts.create!(impression: impression) }
+end

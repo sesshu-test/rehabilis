@@ -1,0 +1,9 @@
+<h1>投稿一覧</h1>
+
+<ul class="posts">
+  <% @posts.each do |post| %>
+    <li><%= link_to post.impression, post %></li>
+  <% end %>
+</ul>
+
+<%= paginate @posts %>

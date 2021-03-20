@@ -92,6 +92,8 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
+    faker (2.17.0)
+      i18n (>= 1.6, < 2)
     ffi (1.15.0)
     gimei (0.5.1)
       romaji
@@ -267,6 +269,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   factory_bot_rails
+  faker
   gimei
   jbuilder (~> 2.7)
   kaminari
