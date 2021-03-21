@@ -21,3 +21,6 @@ users = User.order(:created_at).take(6)
   impression = Faker::Lorem.sentence(word_count: 5)
   users.each { |user| user.posts.create!(impression: impression) }
 end
+
+ # 最初のユーザがお気に入り登録する
+ Like.create(user_id: 1, post_id: 300)
