@@ -2,13 +2,13 @@
 <%= link_to @post.user.name, @post.user %>
 <%= @post.impression %>
 
-<% if !Like.exists?(post_id: @post.id) %>
-  <%= link_to post_likes_path(@post.id), method: :post, remote: true, class:"like-btn" do %>
+<% if !Like.exists?(post_id: @post.id, user_id: current_user.id) %>
+  <%= link_to post_likes_path(@post), method: :post, remote: true, class:"like-btn" do %>
     <span class="fa fa-heart-o" aria-hidden="true"></span>
   <% end %>
   <%= @post.likes.count %>
 <% else %>
-  <%= link_to post_like_path(post_id: @post.id, id: @post.likes[0].id), method: :delete, remote: true, class:"like-btn" do %>
+  <%= link_to post_like_path(@post), method: :delete, remote: true, class:"like-btn" do %>
     <span class="fa fa-heart" aria-hidden="true"></span>
   <% end %>
   <%= @post.likes.count %>
