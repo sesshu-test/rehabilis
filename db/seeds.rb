@@ -24,3 +24,11 @@ end
 
  # 最初のユーザがお気に入り登録する
  Like.create(user_id: 1, post_id: 300)
+
+ # 以下のリレーションシップを作成する
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

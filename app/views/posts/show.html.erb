@@ -14,6 +14,6 @@
   <%= @post.likes.count %>
 <% end %>
 
-<% if current_user == @post.user %>
+<% if current_user?(@post.user) %>
   <%= link_to "delete", post_path(@post.id), method: :delete, data: { confirm: "You sure?" } %>
 <% end %>
