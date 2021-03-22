@@ -2,7 +2,10 @@
 
 <ul class="posts">
   <% @posts.each do |post| %>
-    <li><%= link_to post.impression, post %></li>
+    <li>
+      <%= link_to post.user.name, post.user %>
+      <%= link_to post.impression, post %>
+    </li>
   <% end %>
 </ul>
 

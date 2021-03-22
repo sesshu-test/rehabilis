@@ -17,3 +17,22 @@
 <% if current_user?(@post.user) %>
   <%= link_to "delete", post_path(@post.id), method: :delete, data: { confirm: "You sure?" } %>
 <% end %>
+
+<%= form_with(model: [@post, @comment], local: true) do |f| %>
+  <%= f.text_area :content, placeholder: "例）頑張りました。" %>
+  <%= f.submit "Comment", class: "btn btn-primary" %>
+<% end %>
+
+<h2>コメント一覧</h2>
+<ul class="comments">
+  <% @comments.each do |comment| %>
+    <li>
+      <%= link_to comment.user.name, comment.user %>
+      <%= comment.content %>
+      <% if current_user?(comment.user) %>
+        <%#= link_to "delete", post_path(@post.id), method: :delete, data: { confirm: "You sure?" } %>
+        <%= link_to "delete", post_comment_path(comment.post_id, comment.id), method: :delete, data: { confirm: "You sure?" } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

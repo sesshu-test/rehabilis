@@ -9,6 +9,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @likes = Like.where(post_id: @post.id) 
+    @comments = @post.comments
+    @comment = Comment.new
   end
 
   def new
@@ -37,7 +39,8 @@ class PostsController < ApplicationController
     end
 
     def correct_user
-      @post = current_user.posts.find_by(id: params[:id])
+      @post = current_user.posts.find_by(id: params[:id], post_id: params[:post_id])
+      debugger
       redirect_to root_url if @post.nil?
     end
 end
