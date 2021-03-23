@@ -30,8 +30,7 @@
       <%= link_to comment.user.name, comment.user %>
       <%= comment.content %>
       <% if current_user?(comment.user) %>
-        <%#= link_to "delete", post_path(@post.id), method: :delete, data: { confirm: "You sure?" } %>
-        <%= link_to "delete", post_comment_path(comment.post_id, comment.id), method: :delete, data: { confirm: "You sure?" } %>
+        <%= link_to "削除", post_comment_path(comment.post_id, comment.id), method: :delete, data: { confirm: "You sure?" } %>
       <% end %>
     </li>
   <% end %>
