@@ -22,6 +22,19 @@
 
 <%= render 'follow_form' if user_signed_in? %>
 
+<% if !current_user?(@user) && user_signed_in? %>
+  <% if @is_room == true %>
+    <%= link_to "チャットへ", room_path(@room_id) %>
+  <% else %>
+    <%= form_with(model: @room, local: true) do |f| %>
+      <%= fields_for @entry do |e| %>
+        <%= e.hidden_field :user_id, value: @user.id %>
+      <% end %>
+      <%= f.submit "チャットを始める" %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <ul class="myposts">
   <h3>過去の投稿</h3>
   <% @user.posts.each do |mypost| %>
