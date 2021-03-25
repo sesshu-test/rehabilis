@@ -2,7 +2,7 @@
 
 <h4>参加者</h4>
 <%= @another_entry.user.name %>
-<%= current_user.name %>
+<%= current_user.name %><hr>
 
 <% if @messages.present? %>
   <% @messages.each do |m| %>
