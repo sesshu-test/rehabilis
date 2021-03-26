@@ -5,9 +5,9 @@
 <%= current_user.name %><hr>
 
 <% if @messages.present? %>
-  <% @messages.each do |m| %>
-    <%= link_to m.user.name, m.user %>
-    <%= m.content %><hr>
+  <% @messages.each do |message| %>
+    <%= link_to message.user.name, message.user %>
+    <%= message.content %><hr>
   <% end %>
 <% else %>
   <h3 class="text-center">メッセージはまだありません</h3>
