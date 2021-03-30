@@ -1,0 +1,23 @@
+<ul class="notifications">
+  <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+  <% notifications.each do |notification| %>
+    <li>
+      <% visitor = notification.visitor %>
+      <% case notification.action %>
+        <% when 'follow' then %>
+          <%= link_to visitor.name, user_path(visitor) %> さんがあなたをフォローしました
+        <% when 'like' then %>
+          <%= link_to visitor.name, user_path(visitor) %>さんが
+          <%= link_to "あなたの投稿", post_path(notification.post) %>にいいねしました <br>
+          <%= notification.post.impression %>
+        <% when 'comment' then %>
+          <%= link_to visitor.name, user_path(visitor) %>さんが
+          <%= link_to "あなたの投稿", post_path(notification.post) %>にコメントしました <br>
+          <%= notification.comment.content %>
+        <% when 'message' then %>
+          <%= link_to visitor.name, user_path(visitor) %>さんからメッセージです<br>
+          <%= notification.message.content %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
