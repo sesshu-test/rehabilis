@@ -6,6 +6,7 @@ class NotificationsController < ApplicationController
     @notifications.where(checked: false).each do |notification|
       notification.update(checked: true)
     end
+    @activities = current_user.active_notifications.page(params[:page])
   end
 
 end

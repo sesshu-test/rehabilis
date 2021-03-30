@@ -1,6 +1,8 @@
 <h1>通知</h1>
 
-<%= render 'notification' if @notifications.any? %>
+<%= render 'notification' if @notifications.exists? %>
+
+<%= render 'activity' if @activities.exists? %>
 
 <%= paginate @notifications %>
 
