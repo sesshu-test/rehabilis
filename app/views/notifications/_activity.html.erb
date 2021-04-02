@@ -1,0 +1,21 @@
+<h1>自分の通知</h1>
+<ul class="activities">
+  <% @activities.each do |activity| %>
+    <li>
+      <% visited = activity.visited %>
+      <% case activity.action %>
+        <% when 'follow' then %>
+          <%= link_to visited.name, user_path(visited) %>さんをフォローしました
+        <% when 'like' then %>
+          <%= link_to visited.name %>さんの投稿にいいねしました<br>
+          <%= activity.post.impression %>
+        <% when 'comment' then %>
+          <%= link_to visited.name %>さんの投稿にコメントしました<br>
+          <%= activity.comment.content %>
+        <% when 'message' then %>
+          <%= link_to visited.name %>さんにメッセージを送信しました<br>
+          <%= activity.message.content %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
