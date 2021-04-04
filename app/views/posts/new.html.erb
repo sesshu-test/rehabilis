@@ -1,5 +1,14 @@
 <h1>新規投稿</h1>
 <%= form_with(model: @post, local: true) do |f| %>
   <%= f.text_area :impression, placeholder: "例）頑張りました。" %>
+
+  <%= f.text_field :name, placeholder: "例）スクワット" %>
+  
+  <%= f.text_field :time, placeholder: "5" %>
+  <%= f.label :minutes %>
+
+  <%= f.text_field :count, placeholder: "30" %>
+  <%= f.label :counts %>
+
   <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>

@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   validates :impression, presence: true, length: { maximum: 140 }
   has_many :comments
   has_many :notifications, dependent: :destroy
+  has_many :rehabilitation
 
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索

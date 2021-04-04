@@ -19,7 +19,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    rehabilitation = @post.rehabilitation.build(rehabilitation_params)
     if @post.save
+      rehabilitation.save
       flash[:success] = "post created!"
       redirect_to root_url
     else
@@ -36,6 +38,10 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:impression)
+    end
+
+    def rehabilitation_params
+      params.require(:post).permit(:name, :time, :count)
     end
 
     def correct_user
