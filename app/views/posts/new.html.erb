@@ -1,14 +1,30 @@
 <h1>新規投稿</h1>
 <%= form_with(model: @post, local: true) do |f| %>
+  <%= fields_for :rehabilitation_0 do |r| %>
+    <%= r.text_field :name, placeholder: "例）スクワット" %>
+    
+    <%= r.text_field :time, placeholder: "5" %>
+    <%= r.label :minutes %>
+
+    <%= r.text_field :count, placeholder: "30" %>
+    <%= r.label :counts %>
+
+    <%= f.hidden_field :number, :value => 0 %>
+  <% end %>
+
+  <%= fields_for :rehabilitation_1 do |r| %>
+    <%= r.text_field :name, placeholder: "例）スクワット" %>
+    
+    <%= r.text_field :time, placeholder: "5" %>
+    <%= r.label :minutes %>
+
+    <%= r.text_field :count, placeholder: "30" %>
+    <%= r.label :counts %>
+
+    <%= f.hidden_field :number, :value => 1 %>
+  <% end %>
+
   <%= f.text_area :impression, placeholder: "例）頑張りました。" %>
-
-  <%= f.text_field :name, placeholder: "例）スクワット" %>
-  
-  <%= f.text_field :time, placeholder: "5" %>
-  <%= f.label :minutes %>
-
-  <%= f.text_field :count, placeholder: "30" %>
-  <%= f.label :counts %>
 
   <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>
