@@ -7,6 +7,21 @@ class Post < ApplicationRecord
   has_many :comments
   has_many :notifications, dependent: :destroy
   has_many :rehabilitation
+  has_many :post_hashtag, dependent: :destroy
+  has_many :hashtags, through: :post_hashtag
+
+  #DBへのコミット直前に実行
+  after_create do
+    #1.controller側でcreateしたPostを取得
+    post = Post.find_by(id: self.id)
+    #2.正規表現を用いて、Postのtext内から『#○○○』の文字列を検出
+    hashtags  = self.impression.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    #3.mapメソッドでhashtags配列の要素一つ一つを取り出して、先頭の#を取り除いてDBへ保存する
+    hashtags.uniq.map do |h|
+      hashtag = Hashtag.find_or_create_by(name: h.downcase.delete('#'))
+      post.hashtags << hashtag
+    end
+  end
 
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索

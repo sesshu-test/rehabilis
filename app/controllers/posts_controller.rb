@@ -6,6 +6,12 @@ class PostsController < ApplicationController
     @posts = Post.all.page(params[:page])
   end
 
+  def hashtag
+    @hashtag = Hashtag.find_by(name: params[:name])
+    @posts = @hashtag.post.page(params[:page])
+    render 'posts/index'
+  end
+
   def show
     @post = Post.find(params[:id])
     @likes = Like.where(post_id: @post.id) 

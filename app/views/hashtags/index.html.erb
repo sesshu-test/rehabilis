@@ -1,0 +1,11 @@
+<h1>Hashtags#index</h1>
+
+<ul class="hashtags">
+  <% @hashtags.each do |hashtag| %>
+    <li>
+      <%= link_to "##{hashtag.name} #{hashtag.post.count}件", "/post/hashtag/#{hashtag.name}" %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @hashtags %>

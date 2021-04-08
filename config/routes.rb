@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'posts#index'
+  get '/post/hashtag/:name', to: 'posts#hashtag'
   
   devise_for :users
   resources :users, only: [:index, :show] do
@@ -16,4 +17,5 @@ Rails.application.routes.draw do
   resources :messages, only: [:create, :destroy]
   resources :rooms, only: [:create, :index, :show]
   resources :notifications, only: :index
+  resources :hashtags, only: :index
 end
