@@ -39,19 +39,15 @@ class PostsController < ApplicationController
       params.require(:post).permit(:impression)
     end
 
-    def rehabilitation_params
-      params.require(:rehabilitation).permit(:name, :time, :count)
+    def create_rehabilitations
+      0.upto(params[:post][:number].to_i){|num|
+        @post.rehabilitation.create(params.require("rehabilitation_#{num}").permit(:name, :time, :count))
+      }
     end
 
     def correct_user
       @post = current_user.posts.find_by(id: params[:id], post_id: params[:post_id])
       debugger
       redirect_to root_url if @post.nil?
-    end
-
-    def create_rehabilitations
-      0.upto(params[:post][:number].to_i){|num|
-        @post.rehabilitation.create(params.require("rehabilitation_#{num}").permit(:name, :time, :count))
-      }
     end
 end
