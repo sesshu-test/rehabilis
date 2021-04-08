@@ -1,4 +1,6 @@
 <h1>新規投稿</h1>
+<button>回数</button>
+<button>時間</button>
 <%= form_with(model: @post, local: true) do |f| %>
   <%= fields_for :rehabilitation_0 do |r| %>
     <%= r.text_field :name, placeholder: "例）スクワット" %>
