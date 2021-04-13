@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'posts#index'
   get '/post/hashtag/:name', to: 'posts#hashtag'
+  get 'search' => 'posts#search'
   
   devise_for :users
   resources :users, only: [:index, :show] do

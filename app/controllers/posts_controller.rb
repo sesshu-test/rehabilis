@@ -6,6 +6,12 @@ class PostsController < ApplicationController
     @posts = Post.all.page(params[:page])
   end
 
+  def search
+    @posts = Post.joins(:user, :rehabilitation).search(params[:keyword]).page(params[:page])
+    @keyword = params[:keyword]
+    render "index"
+  end
+
   def hashtag
     @hashtag = Hashtag.find_by(name: params[:name])
     @posts = @hashtag.post.page(params[:page])

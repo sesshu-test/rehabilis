@@ -65,4 +65,9 @@ class Post < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+
+  def self.search(keyword)
+    where(["impression like? OR users.name like? OR rehabilitations.name like?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"])
+  end
+
 end
