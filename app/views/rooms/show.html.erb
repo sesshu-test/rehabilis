@@ -4,17 +4,13 @@
 <%= @another_entry.user.name %>
 <%= current_user.name %><hr>
 
-<% if @messages.present? %>
-  <% @messages.each do |message| %>
-    <%= link_to message.user.name, message.user %>
-    <%= message.content %><hr>
-  <% end %>
-<% else %>
-  <h3 class="text-center">メッセージはまだありません</h3>
-<% end %>
+<div id="messages">
+  <%= render 'messages/messages' %>
+</div>
 
-<%= form_with(model: @message, local: true) do |f| %>
-  <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
+
+<%= form_with(model: @message, local: false) do |f| %>
+  <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70, id: "message_text" %>
   <%= f.hidden_field :room_id, :value => @room.id %>
   <br>
   <%= f.submit "投稿する" %>
