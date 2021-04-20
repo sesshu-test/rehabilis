@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     if message.save
       message.create_notification_message!(current_user)
       respond_to do |format|
-        #format.html { redirect_back(fallback_location: root_path) }
+        format.html { redirect_back(fallback_location: root_path) }
         format.js
       end
     else
@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
     message = Message.find(params[:id])
     message.destroy
     respond_to do |format|
-      #format.html { redirect_back(fallback_location: root_path) }
+      format.html { redirect_back(fallback_location: root_path) }
       format.js
     end
   end

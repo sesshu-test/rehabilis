@@ -4,14 +4,8 @@
 <%= @another_entry.user.name %>
 <%= current_user.name %><hr>
 
-<div id="messages">
-  <%= render 'messages/messages' %>
+<div id="message_area">
+  <%= render 'messages/message_area' %>
 </div>
 
-
-<%= form_with(model: @message, local: false) do |f| %>
-  <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70, id: "message_text" %>
-  <%= f.hidden_field :room_id, :value => @room.id %>
-  <br>
-  <%= f.submit "投稿する" %>
-<% end %>
+<%= render 'messages/form' %>

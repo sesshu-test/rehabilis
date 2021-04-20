@@ -1,2 +1,2 @@
-$("#like_button").html("<%= escape_javascript(render('posts/dislike')) %>");
+$("#like_button").html("<%= escape_javascript(render('likes/unlike')) %>");
 $("#like_count").html('<%= @post.likes.count %>');
