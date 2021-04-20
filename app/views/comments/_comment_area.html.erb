@@ -1,0 +1,12 @@
+<h2>コメント一覧</h2>
+<ul>
+  <% @comments.each do |comment| %>
+    <li>
+      <%= link_to comment.user.name, comment.user %>
+      <%= comment.content %>
+      <% if current_user?(comment.user) %>
+        <%= link_to "削除", post_comment_path(comment.post_id, comment.id), method: :delete, remote: true, data: { confirm: "You sure?" } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
