@@ -33,12 +33,14 @@ gem 'faker'
 gem 'gimei'
 gem 'kaminari'
 gem 'font-awesome-rails'
+gem 'rexml'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rails-controller-testing', '1.0.4'
-  gem 'rspec-rails', '~> 4.0.0'
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
 end
 

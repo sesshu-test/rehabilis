@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :post do
-    impression { "MyText" }
-    user { nil }
+    association :user
+    impression { "頑張りました" }
   end
 end

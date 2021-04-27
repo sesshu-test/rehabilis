@@ -1,7 +1,7 @@
 <h1>投稿詳細</h1>
 <%= link_to @post.user.name, @post.user %>
 
-<% @post.rehabilitation.each do |rehabilitation| %>
+<% @post.rehabilitations.each do |rehabilitation| %>
   <%= rehabilitation.name %>
   <%= "#{rehabilitation.time} 分" if !rehabilitation.time.blank? %>
   <%= "#{rehabilitation.count} 回" if !rehabilitation.count.blank? %>
@@ -9,7 +9,7 @@
 
 <%= @post.impression %>
 
-<%= render 'likes/like_button' %>
+<%= render 'likes/like_button' if user_signed_in? %>
 
 <% if current_user?(@post.user) %>
   <%= link_to "delete", post_path(@post.id), method: :delete, data: { confirm: "You sure?" } %>

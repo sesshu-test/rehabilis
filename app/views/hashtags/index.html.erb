@@ -3,7 +3,7 @@
 <ul class="hashtags">
   <% @hashtags.each do |hashtag| %>
     <li>
-      <%= link_to "##{hashtag.name} #{hashtag.post.count}件", "/post/hashtag/#{hashtag.name}" %>
+      <%= link_to "##{hashtag.name} #{hashtag.posts.count}件", "/post/hashtag/#{hashtag.name}" %>
     </li>
   <% end %>
 </ul>

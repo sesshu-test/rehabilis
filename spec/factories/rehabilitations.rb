@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :rehabilitation do
-    name { "MyString" }
-    time { 1 }
-    post { nil }
+    association :post
+    name { "スクワット" }
+    time { nil }
+    count { 30 }
   end
 end

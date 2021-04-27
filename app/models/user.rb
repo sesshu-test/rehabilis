@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  validates :name, presence: true
 
   # ユーザーをフォローする
   def follow(other_user)

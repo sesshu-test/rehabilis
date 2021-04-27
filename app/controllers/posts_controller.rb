@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.joins(:user, :rehabilitation).search(params[:keyword]).page(params[:page])
+    @posts = Post.joins(:user, :rehabilitations).search(params[:keyword]).page(params[:page])
     @keyword = params[:keyword]
     render "index"
   end
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
 
     def create_rehabilitations
       0.upto(params[:post][:number].to_i){|num|
-        @post.rehabilitation.create(params.require("rehabilitation_#{num}").permit(:name, :time, :count))
+        @post.rehabilitations.create(params.require("rehabilitation_#{num}").permit(:name, :time, :count))
       }
     end
 

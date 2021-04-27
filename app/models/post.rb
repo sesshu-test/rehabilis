@@ -6,9 +6,9 @@ class Post < ApplicationRecord
   validates :impression, presence: true, length: { maximum: 140 }
   has_many :comments
   has_many :notifications, dependent: :destroy
-  has_many :rehabilitation
-  has_many :post_hashtag, dependent: :destroy
-  has_many :hashtags, through: :post_hashtag
+  has_many :rehabilitations
+  has_many :post_hashtags, dependent: :destroy
+  has_many :hashtags, through: :post_hashtags
 
   #DBへのコミット直前に実行
   after_create do
