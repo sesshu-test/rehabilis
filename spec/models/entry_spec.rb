@@ -26,9 +26,21 @@ RSpec.describe Entry, type: :model do
 
     context "一意性の検証" do
       it "user_idとroom_idの組み合わせは一意でなければ保存できない" do
-        entry2 = FactoryBot.build(:entry, user_id: entry.user_id, room_id: entry.room_id)
+        entry2 = FactoryBot.create(:entry, user_id: entry.user_id, room_id: entry.room_id)
         expect(entry).to be_invalid
         expect(entry.save).to be_falsey
+      end
+      it "room_idが同じでもuser_idが違うと保存できる" do
+        user2 = FactoryBot.create(:user)
+        entry2 = FactoryBot.create(:entry, user_id: user2.id, room_id: entry.room_id)
+        expect(entry).to be_valid
+        expect(entry.save).to be_truthy
+      end
+      it "user_idが同じでもroom_idが違うと保存できる" do
+        room2 = FactoryBot.create(:room)
+        entry2 = FactoryBot.create(:entry, user_id: entry.user_id, room_id: room2.id)
+        expect(entry).to be_valid
+        expect(entry.save).to be_truthy
       end
     end
 
