@@ -2,6 +2,7 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :room
   has_many :notifications, dependent: :destroy
+  validates :content, presence: true, length: { maximum: 1000 }
 
   def create_notification_message!(current_user)
     temp = Notification.where(["visitor_id = ? and message_id = ? and action = ? ", current_user.id, id, 'message'])
