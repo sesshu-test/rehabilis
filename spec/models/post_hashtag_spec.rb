@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PostHashtag, type: :model do
   subject(:post_hashtag) { FactoryBot.build(:post_hashtag) }
 
-  describe "create" do
+  describe "#create" do
     context "保存できる場合" do
       it "すべてのパラメータがあれば保存できる" do
         expect(post_hashtag).to be_valid
@@ -21,6 +21,26 @@ RSpec.describe PostHashtag, type: :model do
         post_hashtag.hashtag_id = nil
         expect(post_hashtag).to be_invalid
         expect(post_hashtag.save).to be_falsey
+      end
+    end
+
+    describe "各モデルとのアソシエーション" do
+      let(:association) do
+        described_class.reflect_on_association(target)
+      end
+  
+      context "Postモデルとのアソシエーション" do
+        let(:target) { :post }
+        it "Userとの関連付けはbelongs_toであること" do
+          expect(association.macro).to  eq :belongs_to
+        end
+      end
+  
+      context "Hashtagモデルとのアソシエーション" do
+        let(:target) { :hashtag }
+        it "Roomとの関連付けはbelongs_toであること" do
+          expect(association.macro).to  eq :belongs_to
+        end
       end
     end
 

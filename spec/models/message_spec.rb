@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Message, type: :model do
   subject(:message) { FactoryBot.build(:message) }
 
-  describe "create" do
+  describe "#create" do
     context "保存できる場合" do
       it "全てのパラメーターが揃っていれば保存できる" do
         expect(message).to be_valid
@@ -43,6 +43,39 @@ RSpec.describe Message, type: :model do
         expect(message.save).to be_falsey
       end
     end
+  end
+
+  describe "各モデルとのアソシエーション" do
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context "Userモデルとのアソシエーション" do
+      let(:target) { :user }
+      it "Userとの関連付けはbelongs_toであること" do
+        expect(association.macro).to  eq :belongs_to
+      end
+    end
+
+    context "Roomモデルとのアソシエーション" do
+      let(:target) { :room }
+      it "Roomとの関連付けはbelongs_toであること" do
+        expect(association.macro).to  eq :belongs_to
+      end
+    end
+
+    context "Notificationモデルとのアソシエーション" do
+      let(:target) { :notifications }
+      it "Notificationとの関連付けはhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+      it "Messageが削除されたらNotificationも削除されること" do
+        message = FactoryBot.create(:message)
+        notification = FactoryBot.create(:notification, visitor_id: message.user.id, visited_id: 1, message_id: message.id, action: "message")
+        expect { message.destroy }.to change(Notification, :count).by(-1)
+      end
+    end
+    
   end
 
 end

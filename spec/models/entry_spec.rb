@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Entry, type: :model do
   subject(:entry) { FactoryBot.build(:entry) }
 
-  describe "create" do
+  describe "#create" do
     context "保存できる場合" do
       it "全てのパラメーターが揃っていれば保存できる" do
         expect(entry).to be_valid
@@ -43,7 +43,26 @@ RSpec.describe Entry, type: :model do
         expect(entry.save).to be_truthy
       end
     end
+  end
 
+  describe "各モデルとのアソシエーション" do
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context "Userモデルとのアソシエーション" do
+      let(:target) { :user }
+      it "Userとの関連付けはbelongs_toであること" do
+        expect(association.macro).to  eq :belongs_to
+      end
+    end
+
+    context "Roomモデルとのアソシエーション" do
+      let(:target) { :room }
+      it "Roomとの関連付けはbelongs_toであること" do
+        expect(association.macro).to  eq :belongs_to
+      end
+    end
   end
 
 end

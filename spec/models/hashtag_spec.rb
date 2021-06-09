@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Hashtag, type: :model do
   subject(:hashtag) { FactoryBot.build(:hashtag) }
 
-  describe "create" do
+  describe "#create" do
     context "保存できる場合" do
       it "nameがあれば保存できる" do
         expect(hashtag).to be_valid
@@ -28,6 +28,19 @@ RSpec.describe Hashtag, type: :model do
         expect(hashtag.save).to be_falsey
       end
     end
-    
+  end
+
+  describe "各モデルとのアソシエーション" do
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context "Post_hashtagモデルとのアソシエーション" do
+      let(:target) { :post_hashtags }
+      it "Post_hashtagとの関連付けはhas_manyであること" do
+        expect(association.macro).to  eq :has_many
+      end
+    end
+
   end
 end

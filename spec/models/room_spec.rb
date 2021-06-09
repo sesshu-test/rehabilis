@@ -1,5 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "各モデルとのアソシエーション" do
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context "アソシエーションのテスト" do
+      let(:target) { :entries }
+      it "Entriesとの関連付けはhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+
+      let(:target) { :messages }
+      it "Messagesとの関連付けはhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+  end
 end
