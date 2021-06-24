@@ -54,4 +54,3 @@ production:
   database: rehabilis_production
   username: rehabilis
   password: <%= ENV['REHABILIS_DATABASE_PASSWORD'] %>
-  encoding: unicode
