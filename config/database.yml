@@ -53,4 +53,4 @@ production:
   <<: *default
   database: rehabilis_production
   username: root
-  password: 
+  password: ag4ey8j#&qeV
