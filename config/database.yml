@@ -52,5 +52,5 @@ test:
 production:
   <<: *default
   database: rehabilis_production
-  username: rehabilis
-  password: <%= ENV['REHABILIS_DATABASE_PASSWORD'] %>
+  username: root
+  password: 
