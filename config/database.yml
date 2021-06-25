@@ -53,4 +53,4 @@ production:
   <<: *default
   database: rehabilis_production
   username: root
-  password: 
+  password: <%= ENV['DB_PASSWORD'] %>
