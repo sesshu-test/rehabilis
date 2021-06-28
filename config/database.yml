@@ -54,3 +54,4 @@ production:
   database: rehabilis_production
   username: root
   password: <%= ENV['DB_PASSWORD'] %>
+  socket  : /var/lib/mysql/mysql.sock
