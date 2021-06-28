@@ -5,7 +5,7 @@ lock '3.16.0'
 set :application, 'rehabilis'
 
 # cloneするgitのレポジトリ
-set :repo_url, 'https://github.com/sesshu-test/rehabilis'
+set :repo_url, 'git@github.com:sesshu-test/rehabilis.git'
 
 # deployするブランチ。デフォルトはmasterなのでなくても可。
 set :branch, 'master'
