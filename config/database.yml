@@ -55,5 +55,5 @@ production:
   username: root
   password: 
   socket: /var/lib/mysql/mysql.sock
-  #host: ip-10-0-0-241.us-west-1.compute.internal
+  host: ip-10-0-0-241.us-west-1.compute.internal
 
