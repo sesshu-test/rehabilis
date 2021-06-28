@@ -55,5 +55,4 @@ production:
   username: root
   password: <%= ENV['DB_PASSWORD'] %>
   socket: /var/lib/mysql/mysql.sock
-  host: ip-10-0-0-241
 
