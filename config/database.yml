@@ -13,8 +13,8 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: rails-portfolio
-  password: password
+  username: root
+  password: 
   socket: /tmp/mysql.sock
   host: localhost
 
@@ -53,7 +53,7 @@ production:
   <<: *default
   database: rehabilis_production
   username: root
-  password: <%= ENV['DB_PASSWORD'] %>
+  password: 
   socket: /var/lib/mysql/mysql.sock
-  host: ip-10-0-0-241.us-west-1.compute.internal
+  #host: ip-10-0-0-241.us-west-1.compute.internal
 
