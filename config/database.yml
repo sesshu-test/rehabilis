@@ -51,8 +51,6 @@ test:
 #
 production:
   <<: *default
-  encoding: utf8
-  pool: 5
   database: rehabilis_production
   username: root
   password: <%= ENV['DB_PASSWORD'] %>
