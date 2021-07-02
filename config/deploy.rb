@@ -11,7 +11,7 @@ set :repo_url, 'git@github.com:sesshu-test/rehabilis.git'
 set :branch, 'master'
 
 # deploy先のディレクトリ。 
-set :deploy_to, '/var/www/rails/rehabilis'
+set :deploy_to, '/var/www/rehabilis'
 
 # シンボリックリンクをはるファイル。
 set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
