@@ -50,6 +50,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  <<: *default
   adapter: mysql2
   encoding: utf8mb4
   pool: 5
