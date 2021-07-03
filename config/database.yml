@@ -50,7 +50,6 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  encoding: utf8
   pool: 5
   database: rehabilis_production
   username: root
