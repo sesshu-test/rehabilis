@@ -50,6 +50,8 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  adapter: mysql2
+  encoding: utf8mb4
   pool: 5
   database: rehabilis_production
   username: root
