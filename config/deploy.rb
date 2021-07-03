@@ -20,7 +20,7 @@ set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # 保持するバージョンの個数
-set :keep_releases, 5
+set :keep_releases, 3
 
 # rubyのバージョン
 set :rbenv_ruby, '2.7.2'
@@ -31,7 +31,10 @@ set :log_level, :debug
 namespace :deploy do
   desc 'Restart application'
   task :restart do
-    invoke 'unicorn:restart'
+    #invoke 'unicorn:restart'
+    on roles(:app) do
+      invoke 'unicorn:restart'
+    end
   end
 
   desc 'Create database'
