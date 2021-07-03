@@ -69,8 +69,6 @@ group :test do
   gem 'webdrivers'
 end
 
-
-
 group :production, :staging do
     gem 'unicorn', '5.4.1'
 end
