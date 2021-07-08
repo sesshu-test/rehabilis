@@ -8,14 +8,13 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
   </head>
 
   <body>
-  
     <header>
+      <%= link_to image_tag("logo.svg", alt: "Rehabilis logo", width: "200px"), root_path, id: "logo" %>
+      
       <nav>
-        <%= link_to 'rehabilis', root_path %>
         <% if user_signed_in? %>
           <strong>Login account : <%= link_to current_user.name, current_user %></strong>
           <%= link_to 'ユーザー一覧', users_path %>

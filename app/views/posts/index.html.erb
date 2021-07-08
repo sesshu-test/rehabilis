@@ -12,6 +12,7 @@
     <li>
       <%= link_to post.user.name, post.user %>
       <%= link_to post.impression, post %>
+      <%= time_ago_in_words(post.created_at) %>
     </li>
   <% end %>
 </ul>

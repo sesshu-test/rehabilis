@@ -14,3 +14,9 @@
  *= require_self
  *= require font-awesome
  */
+
+#logo {
+  width: 100px;
+  display: block;
+  margin: auto;
+}

@@ -10,7 +10,7 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET /show" do
-    user = User.find_by(id: User.first.id)
+    let(:user) { FactoryBot.create(:user) }
     it "returns http success" do
       get "/users/#{user.id}"
       expect(response).to have_http_status(:success)
