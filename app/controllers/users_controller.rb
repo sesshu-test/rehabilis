@@ -5,6 +5,21 @@ class UsersController < ApplicationController
   def show
     likes = Like.where(user_id: @user.id).order(created_at: :desc).pluck(:post_id)
     @likes = Post.find(likes)
+
+    #本人のリハビリ情報の取得し、@rehabilisに格納
+    @rehabilis = Rehabilitation.includes(post: :user).where(user: {name: @user.name}).order(created_at: :asc)
+    #グラフに適したデータ構造に変更し、@rehabilidataに格納
+    @rehabilidata = []
+    i = 0
+    @rehabilis.group_by { |rehabili| [rehabili[:name]] }.each do |r|
+      @rehabilidata[i] = {}
+      @rehabilidata[i][:name] = r[0][0]
+      @rehabilidata[i][:data] = []
+        r[1].each do |multi|
+          @rehabilidata[i][:data].push([multi.created_at.to_datetime, multi.count])
+        end
+      i += 1
+    end
   end
 
   def index

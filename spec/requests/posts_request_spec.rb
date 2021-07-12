@@ -25,7 +25,7 @@ RSpec.describe "Posts", type: :request do
   describe "GET /new" do
     it "ログインしていれば、新規投稿ページのアクセスが成功" do
       get "/posts/new"
-      expect(response).to redirect_to "/users/sign_in"
+      expect(response).to redirect_to(new_user_session_path)
       sign_in user
       get "/posts/new"
       expect(response).to have_http_status(:success)

@@ -1,6 +1,20 @@
 <h1>ユーザ詳細</h1>
 <p>ユーザ名：<%= @user.name %></p>
 
+<%#= line_chart @rehabilis.chart_date, xtitle: "日付", ytitle: "回数" %>
+
+<%= line_chart @rehabilidata.each do |r| 
+  {:name => r.name, :data => r.data} 
+end %>
+
+<%#= line_chart @rehabilidata.each { |r|
+    {name: r[:name], data: r[:data]}
+} %>
+
+<%#= line_chart @rehabilidata.each do |r|
+    {name: r.name, data: r.group_by_week(:created_at).count}
+end %>
+
 <% if current_user?(@user) %>
   <%= link_to 'プロフィール変更', edit_user_registration_path %>
 <% end %>

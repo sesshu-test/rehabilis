@@ -15,17 +15,17 @@
       <%= link_to image_tag("logo.svg", alt: "Rehabilis logo", width: "200px"), root_path, id: "logo" %>
       
       <nav>
+        <%= link_to 'ユーザー一覧', users_path %>
+        <%= link_to 'ハッシュタグ一覧', hashtags_path %>
         <% if user_signed_in? %>
           <strong>Login account : <%= link_to current_user.name, current_user %></strong>
-          <%= link_to 'ユーザー一覧', users_path %>
           <%= link_to '通知', notifications_path %>
           <%= link_to 'DM一覧', rooms_path %>
-          <%= link_to 'ハッシュタグ一覧', hashtags_path %>
           <%= link_to '新規投稿', new_post_path %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
         <% else %>
-          <%= link_to 'サインアップ', new_user_registration_path %>
           <%= link_to 'ログイン', new_user_session_path %>
+          <%= link_to 'サインアップ', new_user_registration_path %>
         <% end %>
       </nav>
     </header>
