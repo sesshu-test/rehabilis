@@ -7,17 +7,29 @@ class UsersController < ApplicationController
     @likes = Post.find(likes)
 
     #本人のリハビリ情報の取得し、@rehabilisに格納
-    @rehabilis = Rehabilitation.includes(post: :user).where(user: {name: @user.name}).order(created_at: :asc)
-    #グラフに適したデータ構造に変更し、@rehabilidataに格納
+    rehabilitations = Rehabilitation.includes(post: :user).where(user: {name: @user.name}).order(created_at: :asc)
+    #@rehabilisをグラフに適したデータ構造に変更し、@rehabilidataに格納する
     @rehabilidata = []
     i = 0
-    @rehabilis.group_by { |rehabili| [rehabili[:name]] }.each do |r|
+    rehabilitations.group_by { |rehabilitation| [rehabilitation[:name]] }.each do |r|
       @rehabilidata[i] = {}
+      #リハビリの名称を格納
       @rehabilidata[i][:name] = r[0][0]
       @rehabilidata[i][:data] = []
-        r[1].each do |multi|
-          @rehabilidata[i][:data].push([multi.created_at.to_datetime, multi.count])
+      r[1].each do |multi|
+        #最新のリハビリ情報を格納
+        lastdata = @rehabilidata[i][:data].last
+        #Timestampを文字列にし、日付のみの情報に変更
+        date_string = multi.created_at.to_s.slice(0..9)
+        #初めてのリハビリではなく、かつ、同日にそのリハビリを行っているのであれば
+        if lastdata.presence && date_string == lastdata[0]
+          #その日のリハビリ回数を更新
+          @rehabilidata[i][:data].last[1] += multi.count
+        else
+          #リハビリの日付・回数を格納
+          @rehabilidata[i][:data].push([date_string, multi.count])
         end
+      end
       i += 1
     end
   end
