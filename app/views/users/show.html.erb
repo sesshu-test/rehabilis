@@ -1,9 +1,11 @@
 <h1>ユーザ詳細</h1>
 <p>ユーザ名：<%= @user.name %></p>
 
-<%= line_chart @rehabilidata.each { |r|
-    {name: r[:name], data: r[:data]}
-} %>
+<%= pie_chart @pie_chart_data if @pie_chart_data.presence %>
+
+<%= line_chart @line_chart_data.each { |line|
+    {name: line[:name], data: line[:data]}
+} if @line_chart_data.presence %>
 
 <% if current_user?(@user) %>
   <%= link_to 'プロフィール変更', edit_user_registration_path %>

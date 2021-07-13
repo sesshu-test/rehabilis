@@ -15,8 +15,11 @@ class Rehabilitation < ApplicationRecord
       errors.add(:base, '回数または時間のどちらか一方を入力してください')
     end
 
-    def self.chart_date
-      order(created_at: :asc).pluck('created_at', 'count').to_h
+    def self.judge_count_or_time(string)
+      if string == "count"
+        count
+      elsif string == "time"
+        time
+      end
     end
-
 end
