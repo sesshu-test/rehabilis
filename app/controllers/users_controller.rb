@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     likes = Like.where(user_id: @user.id).order(created_at: :desc).pluck(:post_id)
     @likes = Post.find(likes)
-    get_rehabilitations_data("count")    
+    get_rehabilitations_data("time")    
   end
 
   def index
