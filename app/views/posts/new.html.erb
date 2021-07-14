@@ -14,17 +14,17 @@
     <%= f.hidden_field :number, :value => 0 %>
   <% end %>
 
-  <%= fields_for :rehabilitation_1 do |r| %>
-    <%= r.text_field :name, placeholder: "例）スクワット" %>
+  <%#= fields_for :rehabilitation_1 do |r| %>
+    <%#= r.text_field :name, placeholder: "例）スクワット" %>
     
-    <%= r.text_field :time, placeholder: "5" %>
-    <%= r.label :minutes %>
+    <%#= r.text_field :time, placeholder: "5" %>
+    <%#= r.label :minutes %>
 
-    <%= r.text_field :count, placeholder: "30" %>
-    <%= r.label :counts %>
+    <%#= r.text_field :count, placeholder: "30" %>
+    <%#= r.label :counts %>
 
-    <%= f.hidden_field :number, :value => 1 %>
-  <% end %>
+    <%#= f.hidden_field :number, :value => 1 %>
+  <%# end %>
 
   <%= f.text_area :impression, placeholder: "例）頑張りました。" %>
 

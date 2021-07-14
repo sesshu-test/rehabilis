@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
   def hashtag
     @hashtag = Hashtag.find_by(name: params[:name])
-    @posts = @hashtag.post.page(params[:page])
+    @posts = @hashtag.posts.page(params[:page])
     render 'posts/index'
   end
 
@@ -58,8 +58,7 @@ class PostsController < ApplicationController
     end
 
     def correct_user
-      @post = current_user.posts.find_by(id: params[:id], post_id: params[:post_id])
-      debugger
+      @post = current_user.posts.find_by(id: params[:id])
       redirect_to root_url if @post.nil?
     end
 end

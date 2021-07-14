@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     likes = Like.where(user_id: @user.id).order(created_at: :desc).pluck(:post_id)
     @likes = Post.find(likes)
-    get_rehabilitations_data("time")    
+    get_rehabilitations_data("count")    
   end
 
   def index
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
 
   def get_rehabilitations_data(count_or_time)
     #本人のリハビリ情報の取得し、@rehabilisに格納
-    rehabilitations = Rehabilitation.includes(post: :user).where("#{count_or_time} > 0", user: {name: @user.name}).order(created_at: :asc)
+    rehabilitations = Rehabilitation.where("#{count_or_time} > 0", user: @user).order(created_at: :asc)
     if rehabilitations.presence
       #@rehabilisをグラフに適したデータ構造に変更し、折れ線や円のchart_dataに格納する
       @line_chart_data = []

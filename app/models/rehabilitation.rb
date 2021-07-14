@@ -1,5 +1,6 @@
 class Rehabilitation < ApplicationRecord
   belongs_to :post
+  has_one :user, through: :post
   validates :post, presence: true
   validates :name, presence: true, length: { maximum: 35 }
   validate :required_either_count_or_time
@@ -13,13 +14,5 @@ class Rehabilitation < ApplicationRecord
       return if count.present? ^ time.present?
 
       errors.add(:base, '回数または時間のどちらか一方を入力してください')
-    end
-
-    def self.judge_count_or_time(string)
-      if string == "count"
-        count
-      elsif string == "time"
-        time
-      end
     end
 end
