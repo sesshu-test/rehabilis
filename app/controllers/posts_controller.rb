@@ -3,25 +3,25 @@ class PostsController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def index
-    @posts = Post.all.page(params[:page])
+    @posts = Post.all.includes(:user).page(params[:page])
   end
 
   def search
-    @posts = Post.joins(:user, :rehabilitations).search(params[:keyword]).page(params[:page])
     @keyword = params[:keyword]
+    @posts = Post.joins(:user, :rehabilitations).includes(:user, :rehabilitations).search(@keyword).page(params[:page])
     render "index"
   end
 
   def hashtag
     @hashtag = Hashtag.find_by(name: params[:name])
-    @posts = @hashtag.posts.page(params[:page])
+    @posts = @hashtag.posts.includes(:user).page(params[:page])
     render 'posts/index'
   end
 
   def show
     @post = Post.find(params[:id])
     @likes = Like.where(post_id: @post.id) 
-    @comments = @post.comments
+    @comments = @post.comments.includes(:user)
     @comment = Comment.new
   end
 

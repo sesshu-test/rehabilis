@@ -9,6 +9,11 @@ class Post < ApplicationRecord
   has_many :hashtags, through: :post_hashtags
   validates :user_id, presence: true
   validates :impression, presence: true, length: { maximum: 140 }
+  scope :search, ->(keyword) do
+    where("impression LIKE ?", "%#{keyword}%").
+      or(where("users.name LIKE ?", "%#{keyword}%")).
+        or(where("rehabilitations.name LIKE ?", "%#{keyword}%"))
+  end
 
   #DBへのコミット直前に実行
   after_create do
@@ -64,10 +69,6 @@ class Post < ApplicationRecord
       notification.checked = true
     end
     notification.save if notification.valid?
-  end
-
-  def self.search(keyword)
-    where(["impression like? OR users.name like? OR rehabilitations.name like?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"])
   end
 
 end
