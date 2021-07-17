@@ -7,13 +7,13 @@
         <% when 'follow' then %>
           <%= link_to visited.name, user_path(visited) %>さんをフォローしました
         <% when 'like' then %>
-          <%= link_to visited.name %>さんの投稿にいいねしました<br>
+          <%= link_to visited.name, user_path(visited) %>さんの投稿にいいねしました<br>
           <%= activity.post.impression %>
         <% when 'comment' then %>
-          <%= link_to visited.name %>さんの投稿にコメントしました<br>
+          <%= link_to visited.name, user_path(visited) %>さんの投稿にコメントしました<br>
           <%= activity.comment.content %>
         <% when 'message' then %>
-          <%= link_to visited.name %>さんにメッセージを送信しました<br>
+          <%= link_to visited.name, user_path(visited) %>さんにメッセージを送信しました<br>
           <%= activity.message.content %>
       <% end %>
     </li>

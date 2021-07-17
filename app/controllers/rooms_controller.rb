@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
       my_room_ids << entry.room.id
     end
     # さらにuser_idがログインユーザーでは無いレコードを抽出
-    @another_entries = Entry.where(room_id: my_room_ids).where.not(user_id: current_user.id)
+    @another_entries = Entry.where(room_id: my_room_ids).where.not(user_id: current_user.id).includes(:user, room: :messages)
   end
 
   def show
@@ -26,6 +26,6 @@ class RoomsController < ApplicationController
     @message = Message.new
     # メッセージ相手を抽出
     @another_entry = @room.entries.find_by('user_id != ?', current_user.id)
-    @messages = @room.messages
+    @messages = @room.messages.includes(:user)
   end
 end
