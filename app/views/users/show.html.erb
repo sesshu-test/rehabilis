@@ -50,8 +50,8 @@
 
 <ul class="likes">
   <h3>お気に入り</h3>
-  <% @likes.each do |like| %>
-    <li><%= link_to like.impression, like %></li>
+  <% @liking_posts.each do |post| %>
+    <li><%= link_to post.impression, post %></li>
   <% end %>
 </ul>
 
