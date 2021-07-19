@@ -8,6 +8,11 @@
 <% end %>
 
 <%= @post.impression %>
+<% if @post.images.attached? %>
+  <% @post.images.each do |image| %>
+    <%= image_tag image.variant(resize_to_limit: [500, 500]) %>
+  <% end %>
+<% end %>
 
 <%= render 'likes/like_button' if user_signed_in? %>
 
