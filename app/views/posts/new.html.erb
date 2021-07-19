@@ -28,5 +28,7 @@
 
   <%= f.text_area :impression, placeholder: "例）頑張りました。" %>
 
+  <%= f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png"%>
+
   <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>

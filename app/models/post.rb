@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   belongs_to :user
+  has_many_attached :images
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
@@ -9,6 +10,8 @@ class Post < ApplicationRecord
   has_many :hashtags, through: :post_hashtags
   validates :user_id, presence: true
   validates :impression, presence: true, length: { maximum: 140 }
+  validates :images,   content_type: { in: %w[image/jpeg image/gif image/png], message: "must be a valid image format" },
+                      size:         { less_than: 5.megabytes, message: "should be less than 5MB" }
   scope :search, ->(keyword) do
     where("impression LIKE ?", "%#{keyword}%").
       or(where("users.name LIKE ?", "%#{keyword}%")).
