@@ -36,7 +36,7 @@ gem 'font-awesome-rails'
 gem 'rexml'
 gem 'chartkick'
 gem 'bootstrap-sass', '3.4.1'
-gem 'aws-sdk-s3',  require: false
+gem 'aws-sdk-s3', '~> 1.48', require: false
 gem 'image_processing',           '1.9.3'
 gem 'mini_magick',                '4.9.5'
 gem 'active_storage_validations', '0.8.2'
