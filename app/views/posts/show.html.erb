@@ -1,18 +1,35 @@
 <h1>投稿詳細</h1>
-<%= link_to @post.user.name, @post.user %>
 
-<% @post.rehabilitations.each do |rehabilitation| %>
-  <%= rehabilitation.name %>
-  <%= "#{rehabilitation.time} 分" if !rehabilitation.time.blank? %>
-  <%= "#{rehabilitation.count} 回" if !rehabilitation.count.blank? %>
-<% end %>
-
-<%= @post.impression %>
-<% if @post.images.attached? %>
-  <% @post.images.each do |image| %>
-    <%= image_tag image.variant(resize_to_limit: [500, 500]) %>
+<div class="user">
+  <% @user = @post.user %>
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) %>
+  <% else %>
+    <%= image_tag "default-avatar.png", size: '50' %>
   <% end %>
-<% end %>
+
+  <%= link_to @user.name, @post.user %>
+
+  <%= render 'shared/follow_form' if user_signed_in? %>
+</div>
+
+<div class="post-content">
+  <%= @post.impression %>
+
+  <% @post.rehabilitations.each do |rehabilitation| %>
+    <%= rehabilitation.name %>
+    <%= "#{rehabilitation.time} 分" if !rehabilitation.time.blank? %>
+    <%= "#{rehabilitation.count} 回" if !rehabilitation.count.blank? %>
+  <% end %>
+
+  <%= time_ago_in_words(@post.created_at) %>
+
+  <% if @post.images.attached? %>
+    <% @post.images.each do |image| %>
+      <%= image_tag image.variant(resize_to_limit: [500, 500]) %>
+    <% end %>
+  <% end %>
+</div>
 
 <%= render 'likes/like_button' if user_signed_in? %>
 

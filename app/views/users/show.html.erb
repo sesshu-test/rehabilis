@@ -1,9 +1,9 @@
 <h1>ユーザ詳細</h1>
 
 <% if @user.avatar.attached? %>
-  <%= image_tag @user.avatar.variant(resize_to_limit: [500, 500]) %>
+  <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) %>
 <% else %>
-  <%= image_tag "default-avatar.png" %>
+  <%= image_tag "default-avatar.png", size: '50' %>
 <% end %>
 
 <p>ユーザ名：<%= @user.name %></p>
@@ -35,7 +35,7 @@
   </a>
 </div>
 
-<%= render 'follow_form' if user_signed_in? %>
+<%= render 'shared/follow_form' if user_signed_in? %>
 
 <% if !current_user?(@user) && user_signed_in? %>
   <% if @is_room == true %>
