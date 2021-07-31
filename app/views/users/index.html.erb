@@ -5,11 +5,7 @@
 <ul class="users">
   <% @users.each do |user| %>
     <li>
-      <% if user.avatar.attached? %>
-        <%= image_tag user.avatar.variant(resize_to_limit: [50, 50]) %>
-      <% else %>
-        <%= image_tag "default-avatar.png", size: '50' %>
-      <% end %>
+      <%= image_tag display_avatar(user), size: "#{'50' if display_avatar(user).is_a?(String) }" %>
       <%= link_to user.name, user %>
     </li>
   <% end %>

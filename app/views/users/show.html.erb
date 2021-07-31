@@ -1,24 +1,10 @@
 <h1>ユーザ詳細</h1>
 
-<% if @user.avatar.attached? %>
-  <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) %>
-<% else %>
-  <%= image_tag "default-avatar.png", size: '50' %>
-<% end %>
-
 <p>ユーザ名：<%= @user.name %></p>
 
-<%= link_to "編集", edit_user_registration_path %>
+<%= image_tag display_avatar(@user), size: "#{'50' if display_avatar(@user).is_a?(String) }" %>
 
-<%= pie_chart @pie_chart_data if @pie_chart_data.presence %>
-
-<%= line_chart @line_chart_data.each { |line|
-    {name: line[:name], data: line[:data]}
-} if @line_chart_data.presence %>
-
-<% if current_user?(@user) %>
-  <%= link_to 'プロフィール変更', edit_user_registration_path %>
-<% end %>
+<%= link_to 'プロフィール変更', edit_user_registration_path if current_user?(@user) %>
 
 <div class="stats">
   <a href="<%= following_user_path(@user) %>">
@@ -50,17 +36,12 @@
   <% end %>
 <% end %>
 
-<ul class="myposts">
-  <h3>過去の投稿</h3>
-  <% @user.posts.each do |mypost| %>
-    <li><%= link_to mypost.impression, mypost %></li>
-  <% end %>
-</ul>
+<div id="archive-tab">
+  <%= link_to "グラフ", graph_path(id: @user.id, count_or_time: "count"), remote: true %>
+  <%= link_to "過去の投稿", myposts_path(id: @user.id), remote: true %>
+  <%= link_to "いいね", likes_path(id: @user.id), remote: true %>
+</div>
 
-<ul class="likes">
-  <h3>お気に入り</h3>
-  <% @liking_posts.each do |post| %>
-    <li><%= link_to post.impression, post %></li>
-  <% end %>
-</ul>
-
+<div id="archive">
+  <%= render 'graph' %>
+</div>

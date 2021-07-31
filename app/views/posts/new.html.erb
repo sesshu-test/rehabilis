@@ -1,5 +1,6 @@
 <h1>新規投稿</h1>
 <button>回数</button>
+<%#= link_to "回数", new_rehabilisation_path(calc: "plus_count")#, remote: true %>
 <button>時間</button>
 <%= form_with(model: @post, local: true) do |f| %>
   <%= fields_for :rehabilitation_0 do |r| %>

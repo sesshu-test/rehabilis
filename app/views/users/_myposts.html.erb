@@ -1,0 +1,6 @@
+<ul class="myposts">
+  <h3>過去の投稿</h3>
+  <% @myposts.each do |mypost| %>
+    <li><%= link_to mypost.impression, mypost %></li>
+  <% end %>
+</ul>

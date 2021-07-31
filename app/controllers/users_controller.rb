@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :following, :followers]
+  before_action :set_user, only: [:show, :following, :followers, :myposts, :likes, :graph]
   before_action :join_room, only: :show
 
   def show
-    likes = Like.where(user_id: @user.id).order(created_at: :desc).pluck(:post_id)
-    @liking_posts = Post.find(likes)
-    get_rehabilitations_data("count")    
+    @count_or_time = "count"
+    get_rehabilitations_data(@count_or_time)
   end
 
   def index
@@ -22,6 +21,32 @@ class UsersController < ApplicationController
     @title = "Followers"
     @users = @user.followers.page(params[:page])
     render 'show_follow'
+  end
+
+  def graph
+    @count_or_time = params[:count_or_time]
+    get_rehabilitations_data(@count_or_time)
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
+  end
+
+  def myposts
+    @myposts = @user.posts
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
+  end
+
+  def likes
+    likes = Like.where(user_id: @user.id).order(created_at: :desc).pluck(:post_id)
+    @liking_posts = Post.includes(:user).find(likes)
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
   end
 
   private
