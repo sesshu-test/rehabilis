@@ -9,4 +9,9 @@
   <% end %>
 </ul>
 
-<%= paginate @posts, remote: true %>
+<% if @category.present? %>
+  <%= paginate @posts, remote: true %>
+<% else %>
+  <%= paginate @posts %>
+<% end %>
+<%#= paginate @posts, remote: "#{'true' if @category.present?}" %>
