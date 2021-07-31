@@ -1,5 +1,13 @@
 <h1>投稿一覧</h1>
 
+<div id="category-tab">
+  <%= link_to "タイムライン", root_path(name: "timeline"), remote: true %>
+  <%= link_to "全て", root_path(name: "all"), remote: true %>
+  <% @hashtags.each do |hashtag| %>
+    <%= link_to "##{hashtag.name} #{hashtag.posts.count}件", root_path(name: hashtag.name), remote: true %>
+  <% end %>
+</div>
+
 <div class="search-form">
   <%= form_with url: search_path, method: :get, local: true do |f| %>
     <%= f.text_field :keyword, value: @keyword %>
@@ -7,14 +15,6 @@
   <% end %>
 </div>
 
-<ul class="posts">
-  <% @posts.each do |post| %>
-    <li>
-      <%= link_to post.user.name, post.user %>
-      <%= link_to post.impression, post %>
-      <%= time_ago_in_words(post.created_at) %>
-    </li>
-  <% end %>
-</ul>
-
-<%= paginate @posts %>
+<div id="categorized-posts">
+  <%= render 'categorized_posts' %>
+</div>

@@ -1,21 +1,35 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy]
   before_action :correct_user,   only: :destroy
+  before_action :get_hashtags,   only: [:index, :search]
 
   def index
-    @posts = Post.all.includes(:user).page(params[:page])
+    if params[:name].nil?
+      user_ids = current_user.following.pluck(:id) << current_user.id
+      @posts = Post.where(user_id: user_ids).includes(:user).page(params[:page])
+    else
+      if params[:name] == 'timeline'
+        user_ids = current_user.following.pluck(:id) << current_user.id
+        @posts = Post.where(user_id: user_ids).includes(:user).page(params[:page])
+      #全ユーザの投稿一覧
+      elsif params[:name] == 'all'
+        @posts = Post.includes(:user).page(params[:page])
+      #選択されたハッシュタグの投稿一覧
+      else
+        @hashtag = Hashtag.find_by(name: params[:name])
+        @posts = @hashtag.posts.includes(:user).page(params[:page])
+      end
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
+      end
+    end
   end
 
   def search
     @keyword = params[:keyword]
     @posts = Post.joins(:user, :rehabilitations).includes(:user, :rehabilitations).search(@keyword).page(params[:page])
     render "index"
-  end
-
-  def hashtag
-    @hashtag = Hashtag.find_by(name: params[:name])
-    @posts = @hashtag.posts.includes(:user).page(params[:page])
-    render 'posts/index'
   end
 
   def show
@@ -27,6 +41,10 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+  end
+
+  def new_rehabilitation
+    params[:calc] = "plus_count"
   end
 
   def create
@@ -49,6 +67,10 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:impression, images: [])
+    end
+
+    def get_hashtags
+      @hashtags = Hashtag.joins(:post_hashtags).group(:hashtag_id).order('count(post_id) desc').includes(:posts).first(5)
     end
 
     def create_rehabilitations

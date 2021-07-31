@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  get '/post/hashtag/:name', to: 'posts#hashtag'
   get 'search' => 'posts#search'
+  get "/users/graph", to: 'users#graph', as: 'graph'
+  get "/users/myposts", to: 'users#myposts', as: 'myposts'
+  get "/users/likes", to: 'users#likes', as: 'likes'
   post 'like/:id' => 'likes#create', as: 'create_like'
   delete 'like/:id' => 'likes#destroy', as: 'destroy_like'
   
