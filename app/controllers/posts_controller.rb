@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy]
   before_action :correct_user,   only: :destroy
-  before_action :get_hashtags,   only: [:index, :categorized_index ,:search]
+  before_action :get_hashtags,   only: [:index, :categorized_posts ,:search]
 
   def index
     if user_signed_in?
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def categorized_index
+  def categorized_posts
     @category = params[:name]
     if @category == 'timeline' && user_signed_in?
       user_ids = current_user.following.pluck(:id) << current_user.id
