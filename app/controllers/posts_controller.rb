@@ -46,11 +46,26 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @count_number = 0
+    @time_number = 0
   end
 
-  #def new_rehabilitation
-  #  params[:calc] = "plus_count"
-  #end
+  def new_rehabilitation
+    if params[:count] == "plus"
+      @count_number = params[:count_number].to_i + 1
+      @time_number = params[:time_number].to_i
+    elsif params[:count] == "minus"
+      @count_number = params[:count_number].to_i - 1
+      @time_number = params[:time_number].to_i
+    elsif params[:time] == "plus"
+      @count_number = params[:count_number].to_i
+      @time_number = params[:time_number].to_i + 1
+    elsif params[:time] == "minus"
+      @count_number = params[:count_number].to_i
+      @time_number = params[:time_number].to_i - 1
+    end
+    render 'new'
+  end
 
   def create
     @post = current_user.posts.build(post_params)
@@ -71,7 +86,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:impression, images: [])
+      params.permit(:impression, images: [])
     end
 
     def get_hashtags
@@ -79,9 +94,11 @@ class PostsController < ApplicationController
     end
 
     def create_rehabilitations
-      0.upto(params[:post][:number].to_i){|num|
-        @post.rehabilitations.create(params.require("rehabilitation_#{num}").permit(:name, :time, :count))
-      }
+      if params[:rehabilitations].keys.length <= 10
+        params[:rehabilitations].keys.each do |key|
+          @post.rehabilitations.create(params.require("rehabilitations").require(key).permit(:name, :time, :count))
+        end
+      end
     end
 
     def correct_user

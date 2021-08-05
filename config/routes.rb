@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'posts#index'
   get "/posts/categorized_posts", to: 'posts#categorized_posts', as: 'categorized_posts'
+  #get "/posts/new_rehabilitation", to: 'posts#new_rehabilitation', as: 'new_rehabilitation'
   get 'search' => 'posts#search'
   get "/users/graph", to: 'users#graph', as: 'graph'
   get "/users/myposts", to: 'users#myposts', as: 'myposts'

@@ -1,35 +1,14 @@
+<%= javascript_pack_tag 'posts/new' %>
+
 <h1>新規投稿</h1>
-<button>回数</button>
-<%#= link_to "回数", new_rehabilisation_path(calc: "plus_count")#, remote: true %>
-<button>時間</button>
-<%= form_with(model: @post, local: true) do |f| %>
-  <%= fields_for :rehabilitation_0 do |r| %>
-    <%= r.text_field :name, placeholder: "例）スクワット" %>
-    
-    <%= r.text_field :time, placeholder: "5" %>
-    <%= r.label :minutes %>
 
-    <%= r.text_field :count, placeholder: "30" %>
-    <%= r.label :counts %>
+<%#= link_to "回数系", new_rehabilitation_path(count: "plus", count_number: @count_number, time_number: @time_number) %>
+<%#= link_to "時間系", new_rehabilitation_path(time: "plus", count_number: @count_number, time_number: @time_number) %>
 
-    <%= f.hidden_field :number, :value => 0 %>
-  <% end %>
+<button id="add-count-rehabilitation-btn">回数系</button>
+<button id="add-time-rehabilitation-btn">時間系</button>
 
-  <%#= fields_for :rehabilitation_1 do |r| %>
-    <%#= r.text_field :name, placeholder: "例）スクワット" %>
-    
-    <%#= r.text_field :time, placeholder: "5" %>
-    <%#= r.label :minutes %>
-
-    <%#= r.text_field :count, placeholder: "30" %>
-    <%#= r.label :counts %>
-
-    <%#= f.hidden_field :number, :value => 1 %>
-  <%# end %>
-
-  <%= f.text_area :impression, placeholder: "例）頑張りました。" %>
-
-  <%= f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png"%>
-
-  <%= f.submit "Post", class: "btn btn-primary" %>
-<% end %>
+<div id="post-form">
+  <%= render 'post_form' %>
+</div>
+<p>*入力フォームは最大で10個までです*</p>

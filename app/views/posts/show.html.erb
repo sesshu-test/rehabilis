@@ -16,11 +16,15 @@
 <div class="post-content">
   <%= @post.impression %>
 
-  <% @post.rehabilitations.each do |rehabilitation| %>
-    <%= rehabilitation.name %>
-    <%= "#{rehabilitation.time} 分" if !rehabilitation.time.blank? %>
-    <%= "#{rehabilitation.count} 回" if !rehabilitation.count.blank? %>
-  <% end %>
+  <ul>
+    <% @post.rehabilitations.each do |rehabilitation| %>
+      <li>
+        <%= rehabilitation.name %>
+        <%= "#{rehabilitation.time} 分" if !rehabilitation.time.blank? %>
+        <%= "#{rehabilitation.count} 回" if !rehabilitation.count.blank? %>
+      </li>
+    <% end %>
+  </ul>
 
   <%= time_ago_in_words(@post.created_at) %>
 

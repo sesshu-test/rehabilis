@@ -1,0 +1,9 @@
+<%= form_with(url: posts_path, local: true) do |f| %>
+  <div id="count-rehabilitation-form"></div>
+  <div id="time-rehabilitation-form"></div>
+
+  <%= f.text_area :impression, placeholder: "例）頑張りました。" %>
+  <%= f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png"%>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>
+
