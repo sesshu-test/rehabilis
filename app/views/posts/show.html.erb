@@ -38,11 +38,11 @@
 <%= render 'likes/like_button' if user_signed_in? %>
 
 <% if current_user?(@post.user) %>
-  <%= link_to "delete", post_path(@post.id), method: :delete, data: { confirm: "You sure?" } %>
+  <%= link_to "削除", post_path(@post.id), method: :delete, data: { confirm: "You sure?" } %>
 <% end %>
 
 <div id="comment_form">
-  <%= render 'comments/form' %>
+  <%= render 'comments/form' if user_signed_in? %>
 </div>
 
 <div id="comment_area">

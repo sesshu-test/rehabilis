@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Message, type: :model do
-  subject(:message) { FactoryBot.build(:message) }
+  subject(:message) { build(:message) }
 
   describe "#create" do
     context "保存できる場合" do
@@ -70,8 +70,8 @@ RSpec.describe Message, type: :model do
         expect(association.macro).to eq :has_many
       end
       it "Messageが削除されたらNotificationも削除されること" do
-        message = FactoryBot.create(:message)
-        notification = FactoryBot.create(:notification, visitor_id: message.user.id, visited_id: 1, message_id: message.id, action: "message")
+        message = create(:message)
+        notification = create(:notification, visitor_id: message.user.id, visited_id: 1, message_id: message.id, action: "message")
         expect { message.destroy }.to change(Notification, :count).by(-1)
       end
     end

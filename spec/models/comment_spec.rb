@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   describe "#create" do
-    subject(:post) { FactoryBot.create(:post) }
-    subject(:comment) { FactoryBot.build(:comment, post_id: post.id, user_id: post.user.id) }
+    subject(:post) { create(:post) }
+    subject(:comment) { build(:comment, post_id: post.id, user_id: post.user.id) }
 
     context "保存できる場合" do
       it "content、post_id、 user_idがある場合、保存できる" do
@@ -56,8 +56,8 @@ RSpec.describe Comment, type: :model do
         expect(association.macro).to eq :has_many
       end
       it "Commentが削除されたらNotificationも削除されること" do
-        comment = FactoryBot.create(:comment)
-        notification = FactoryBot.create(:notification, visitor_id: comment.user.id, visited_id: comment.post.user_id, post_id: comment.post.id, comment_id: comment.id, action: "comment")
+        comment = create(:comment)
+        notification = create(:notification, visitor_id: comment.user.id, visited_id: comment.post.user_id, post_id: comment.post.id, comment_id: comment.id, action: "comment")
         expect { comment.destroy }.to change(Notification, :count).by(-1)
       end
     end

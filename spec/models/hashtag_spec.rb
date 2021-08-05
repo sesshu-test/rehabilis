@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Hashtag, type: :model do
-  subject(:hashtag) { FactoryBot.build(:hashtag) }
+  subject(:hashtag) { build(:hashtag) }
 
   describe "#create" do
     context "保存できる場合" do

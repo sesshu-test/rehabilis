@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   describe "#create" do
-    subject(:user) { FactoryBot.create(:user) }
-    subject(:post) { FactoryBot.build(:post, user_id: user.id) }
+    subject(:user) { create(:user) }
+    subject(:post) { build(:post, user_id: user.id) }
 
     context "保存できる場合" do
       it "impression, userがある場合、保存できる" do
@@ -30,7 +30,7 @@ RSpec.describe Post, type: :model do
     let(:association) do
       described_class.reflect_on_association(target)
     end
-    let(:post) { FactoryBot.create(:post) }
+    let(:post) { create(:post) }
 
     context "Likeモデルとのアソシエーション" do
       let(:target) { :likes }
@@ -38,7 +38,7 @@ RSpec.describe Post, type: :model do
         expect(association.macro).to eq :has_many
       end
       it "Postが削除されたらLikeも削除されること" do
-        like = FactoryBot.create(:like, post_id: post.id)
+        like = create(:like, post_id: post.id)
         expect { post.destroy }.to change(Like, :count).by(-1)
       end
     end
@@ -49,7 +49,7 @@ RSpec.describe Post, type: :model do
         expect(association.macro).to eq :has_many
       end
       it "Postが削除されたらCommentも削除されること" do
-        comment = FactoryBot.create(:comment, post_id: post.id)
+        comment = create(:comment, post_id: post.id)
         expect { post.destroy }.to change(Comment, :count).by(-1)
       end
     end
@@ -60,7 +60,7 @@ RSpec.describe Post, type: :model do
         expect(association.macro).to eq :has_many
       end
       it "Postが削除されたらRehabilitationも削除されること" do
-        rehabilitation = FactoryBot.create(:rehabilitation, post_id: post.id)
+        rehabilitation = create(:rehabilitation, post_id: post.id)
         expect { post.destroy }.to change(Rehabilitation, :count).by(-1)
       end
     end
@@ -71,7 +71,7 @@ RSpec.describe Post, type: :model do
         expect(association.macro).to eq :has_many
       end
       it "Postが削除されたらNotificationも削除されること" do
-        notification = FactoryBot.create(:notification, post_id: post.id, visitor_id: 1, visited_id: 1, action: "like")
+        notification = create(:notification, post_id: post.id, visitor_id: 1, visited_id: 1, action: "like")
         expect { post.destroy }.to change(Notification, :count).by(-1)
       end
     end
@@ -82,7 +82,7 @@ RSpec.describe Post, type: :model do
         expect(association.macro).to eq :has_many
       end
       it "Postが削除されたらPost_hashtagも削除されること" do
-        post_hashtag = FactoryBot.create(:post_hashtag, post_id: post.id)
+        post_hashtag = create(:post_hashtag, post_id: post.id)
         expect { post.destroy }.to change(PostHashtag, :count).by(-1)
       end
     end

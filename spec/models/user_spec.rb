@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "#create" do
-    subject(:user) { FactoryBot.build(:user) }
+    subject(:user) { build(:user) }
 
     context "保存できる場合" do
       it "name、email、password、confirmed_atがある場合、保存できる" do
@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
         expect(user.save).to be_falsey
       end
       it "emailが重複している場合、保存できない" do
-        FactoryBot.create(:user, email: "test@example.com")
+        create(:user, email: "test@example.com")
         user.email = "test@example.com"
         expect(user).to be_invalid
         expect(user.save).to be_falsey

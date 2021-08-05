@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Like, type: :model do
   describe "#create" do
-    subject(:post) { FactoryBot.create(:post) }
-    subject(:like) { FactoryBot.build(:like, user_id: post.user_id, post_id: post.id) }
+    subject(:post) { create(:post) }
+    subject(:like) { build(:like, user_id: post.user_id, post_id: post.id) }
 
     context "保存できる場合" do
       it "post_idとuser_idがある場合、保存できる" do
@@ -25,7 +25,7 @@ RSpec.describe Like, type: :model do
       end
       it "user_idとpost_idが一意でない場合、保存できない" do
         like.save
-        like2 = FactoryBot.build(:like, user_id: like.user_id, post_id: like.post_id)
+        like2 = build(:like, user_id: like.user_id, post_id: like.post_id)
         expect(like2).to be_invalid
         expect(like2.save).to be_falsey
       end

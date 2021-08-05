@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Rehabilitation, type: :model do
   describe "#create" do
-    subject(:post) { FactoryBot.create(:post) }
-    subject(:rehabilitation) { FactoryBot.create(:rehabilitation, post_id: post.id) }
+    subject(:post) { create(:post) }
+    subject(:rehabilitation) { create(:rehabilitation, post_id: post.id) }
 
     context "保存できる場合" do
       it "post_id、name、countがあれば、保存できる" do

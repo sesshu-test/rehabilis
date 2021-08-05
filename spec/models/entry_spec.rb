@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Entry, type: :model do
-  subject(:entry) { FactoryBot.build(:entry) }
+  subject(:entry) { build(:entry) }
 
   describe "#create" do
     context "保存できる場合" do
@@ -26,19 +26,19 @@ RSpec.describe Entry, type: :model do
 
     context "一意性の検証" do
       it "user_idとroom_idの組み合わせは一意でなければ保存できない" do
-        entry2 = FactoryBot.create(:entry, user_id: entry.user_id, room_id: entry.room_id)
+        entry2 = create(:entry, user_id: entry.user_id, room_id: entry.room_id)
         expect(entry).to be_invalid
         expect(entry.save).to be_falsey
       end
       it "room_idが同じでもuser_idが違うと保存できる" do
-        user2 = FactoryBot.create(:user)
-        entry2 = FactoryBot.create(:entry, user_id: user2.id, room_id: entry.room_id)
+        user2 = create(:user)
+        entry2 = create(:entry, user_id: user2.id, room_id: entry.room_id)
         expect(entry).to be_valid
         expect(entry.save).to be_truthy
       end
       it "user_idが同じでもroom_idが違うと保存できる" do
-        room2 = FactoryBot.create(:room)
-        entry2 = FactoryBot.create(:entry, user_id: entry.user_id, room_id: room2.id)
+        room2 = create(:room)
+        entry2 = create(:entry, user_id: entry.user_id, room_id: room2.id)
         expect(entry).to be_valid
         expect(entry.save).to be_truthy
       end
