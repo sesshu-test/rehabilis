@@ -1,9 +1,11 @@
 <h1>通知</h1>
+<div id="archive-tab">
+  <%= link_to "通知", notification_path %>
+  <%= link_to "活動", activity_path %>
+</div>
 
-<%= render 'notification' if @notifications.exists? %>
-
-<%= render 'activity' if @activities.exists? %>
+<div class="notifications">
+  <%= render 'notification' if @notifications.exists? %>
+</div>
 
 <%= paginate @notifications %>
-
-

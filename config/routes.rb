@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "/users/graph", to: 'users#graph', as: 'graph'
   get "/users/myposts", to: 'users#myposts', as: 'myposts'
   get "/users/likes", to: 'users#likes', as: 'likes'
+  get "/notifications/notification", to: 'notifications#notification', as: 'notification'
+  get "/notifications/activity", to: 'notifications#activity', as: 'activity'
   post 'like/:id' => 'likes#create', as: 'create_like'
   delete 'like/:id' => 'likes#destroy', as: 'destroy_like'
   
