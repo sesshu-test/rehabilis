@@ -1,6 +1,5 @@
-<ul class="notifications">
-  <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
-  <% notifications.each do |notification| %>
+<ul>
+  <% @notifications.each do |notification| %>
     <li>
       <% visitor = notification.visitor %>
       <% case notification.action %>
@@ -21,3 +20,5 @@
     </li>
   <% end %>
 </ul>
+
+<%= paginate @notifications, remote: true %>
