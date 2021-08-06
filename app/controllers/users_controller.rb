@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def myposts
-    @myposts = @user.posts
+    @myposts = @user.posts.page(params[:page])
     respond_to do |format|
       format.html { redirect_back(fallback_location: root_path) }
       format.js
@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   def likes
     likes = Like.where(user_id: @user.id).order(created_at: :desc).pluck(:post_id)
     @liking_posts = Post.includes(:user).find(likes)
+    @liking_posts = Kaminari.paginate_array(@liking_posts).page(params[:page])
     respond_to do |format|
       format.html { redirect_back(fallback_location: root_path) }
       format.js

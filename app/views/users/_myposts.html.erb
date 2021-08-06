@@ -4,3 +4,5 @@
     <li><%= link_to mypost.impression, mypost %></li>
   <% end %>
 </ul>
+
+<%= paginate @myposts, remote: true %>
