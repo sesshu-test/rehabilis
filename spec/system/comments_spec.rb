@@ -4,6 +4,8 @@ RSpec.describe 'コメント投稿', type: :system do
   let(:post) { create(:post) }
   let(:comment) { create(:comment) }
 
+  # ログインしていないユーザーは、System/postsにてコメント投稿フォームが表示されないことを確認済み
+
   it 'ログインしたユーザーはツイート詳細ページでコメントを投稿できる' do
     # ログインする
     signIn(post.user)
