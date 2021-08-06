@@ -20,6 +20,9 @@
         <% if user_signed_in? %>
           <strong>Login account : <%= link_to current_user.name, current_user %></strong>
           <%= link_to '通知', notifications_path %>
+          <% if unchecked_notifications.any? %>
+            <span>未読あり</span>
+          <% end %>
           <%= link_to 'DM一覧', rooms_path %>
           <%= link_to '新規投稿', new_post_path %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>

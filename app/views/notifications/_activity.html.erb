@@ -1,5 +1,4 @@
-<h1>自分の通知</h1>
-<ul class="activities">
+<ul>
   <% @activities.each do |activity| %>
     <li>
       <% visited = activity.visited %>
@@ -7,10 +6,18 @@
         <% when 'follow' then %>
           <%= link_to visited.name, user_path(visited) %>さんをフォローしました
         <% when 'like' then %>
-          <%= link_to visited.name, user_path(visited) %>さんの投稿にいいねしました<br>
+          <% if current_user? visited %>
+            <p>自分の投稿にいいねしました</p>
+          <% else %>
+            <%= link_to visited.name, user_path(visited) %>さんの投稿にいいねしました<br>
+          <% end %>
           <%= activity.post.impression %>
         <% when 'comment' then %>
-          <%= link_to visited.name, user_path(visited) %>さんの投稿にコメントしました<br>
+          <% if current_user? visited %>
+            <p>自分の投稿にコメントしました</p>
+          <% else %>
+            <%= link_to visited.name, user_path(visited) %>さんの投稿にコメントしました<br>
+          <% end %>
           <%= activity.comment.content %>
         <% when 'message' then %>
           <%= link_to visited.name, user_path(visited) %>さんにメッセージを送信しました<br>
@@ -19,3 +26,5 @@
     </li>
   <% end %>
 </ul>
+
+<%= paginate @activities, remote: true %>

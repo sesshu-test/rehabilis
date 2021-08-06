@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
-  let(:user) { FactoryBot.create(:user) }
-  let(:post) { FactoryBot.create(:post) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
 
   describe "GET /index" do
     it "投稿一覧が表示される" do
