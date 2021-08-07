@@ -12,18 +12,18 @@
 
   <body>
     <header>
-      <%= link_to image_tag("logo.svg", alt: "Rehabilis logo", width: "200px"), root_path, id: "logo" %>
+      <%= link_to image_tag("logo.svg", alt: "ロゴ", width: "200px"), root_path, id: "logo" %>
       
       <nav>
         <%= link_to 'ユーザー一覧', users_path %>
         <%= link_to 'ハッシュタグ一覧', hashtags_path %>
         <% if user_signed_in? %>
-          <strong>Login account : <%= link_to current_user.name, current_user %></strong>
-          <%= link_to '通知', notifications_path %>
+          <%= link_to image_tag(display_avatar(current_user), size: "#{'50' if display_avatar(current_user).is_a?(String) }"), current_user %>
+          <%= link_to image_tag("bell.svg", alt: "通知", width: "20px"), notifications_path %>
           <% if unchecked_notifications.any? %>
             <span>未読あり</span>
           <% end %>
-          <%= link_to 'DM一覧', rooms_path %>
+          <%= link_to image_tag("mail.svg", alt: "DN", width: "20px"), rooms_path %>
           <%= link_to '新規投稿', new_post_path %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
         <% else %>
