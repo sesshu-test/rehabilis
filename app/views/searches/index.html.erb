@@ -1,0 +1,10 @@
+<h1>検索結果</h1>
+
+<div id="searches-tab">
+  <%= link_to "投稿", searches_posts_path(keyword: @keyword), remote: true %>
+  <%= link_to "ユーザー", searches_users_path(keyword: @keyword), remote: true %>
+</div>
+
+<div id="search-results">
+  <%= render 'shared/categorized_posts' %>
+</div>
