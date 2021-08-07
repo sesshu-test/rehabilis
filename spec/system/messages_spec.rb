@@ -4,7 +4,7 @@ RSpec.describe 'メッセージ送信', type: :system do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
 
-  it 'ログインしたユーザーは他人にメッセージを送信でき、受信側は通知から確認できる' do
+  it 'ログインしたユーザーは他人にメッセージを送信でき、受信側は通知一覧とDM一覧から確認できる' do
     test_message = 'テストメッセージ'
     # ログインする
     signIn(user)

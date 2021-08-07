@@ -12,10 +12,10 @@ class Post < ApplicationRecord
   validates :impression, presence: true, length: { maximum: 140 }
   validates :images,   content_type: { in: %w[image/jpeg image/gif image/png], message: "must be a valid image format" },
                       size:         { less_than: 5.megabytes, message: "should be less than 5MB" }
-  scope :search, ->(keyword) do
+  scope :search_posts, ->(keyword) do
     where("impression LIKE ?", "%#{keyword}%").
-      or(where("users.name LIKE ?", "%#{keyword}%")).
-        or(where("rehabilitations.name LIKE ?", "%#{keyword}%"))
+      or(where("users.name LIKE?", "%#{keyword}%")).
+        or(where("rehabilitations.name LIKE?", "%#{keyword}%"))
   end
 
   #DBへのコミット直前に実行

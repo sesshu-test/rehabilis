@@ -24,6 +24,9 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :avatar,   content_type: { in: %w[image/jpeg image/gif image/png], message: "must be a valid image format" },
                       size:         { less_than: 5.megabytes, message: "should be less than 5MB" }
+  scope :search_users, ->(keyword) do
+    where("name LIKE ?", "%#{keyword}%")
+  end
 
   # ユーザーをフォローする
   def follow(other_user)

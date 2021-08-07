@@ -1,11 +1,7 @@
 <h1>ハッシュタグ一覧</h1>
 
-<ul class="hashtags">
-  <% @hashtags.each do |hashtag| %>
-    <li>
-      <%= link_to "##{hashtag.name} #{hashtag.posts.count}件", root_path(name: hashtag.name) %>
-    </li>
-  <% end %>
-</ul>
+<div class="hashtags">
+  <%= render 'shared/hashtags' %>
+</div>
 
 <%= paginate @hashtags %>

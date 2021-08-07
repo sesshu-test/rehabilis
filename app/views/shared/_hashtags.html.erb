@@ -1,0 +1,7 @@
+<ul>
+  <% @hashtags.each do |hashtag| %>
+    <li>
+      <%= link_to "##{hashtag.name} #{hashtag.posts.count}件", root_path(name: hashtag.name) %>
+    </li>
+  <% end %>
+</ul>

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'posts#index'
   get "/posts/categorized_posts", to: 'posts#categorized_posts', as: 'categorized_posts'
+  get "/searches/icon_click", to: 'searches#icon_click', as: 'searches_icon_click'
+  get "/searches/posts", to: 'searches#posts', as: 'searches_posts'
+  get "/searches/users", to: 'searches#users', as: 'searches_users'
   #get "/posts/new_rehabilitation", to: 'posts#new_rehabilitation', as: 'new_rehabilitation'
-  get 'search' => 'posts#search'
   get "/users/graph", to: 'users#graph', as: 'graph'
   get "/users/myposts", to: 'users#myposts', as: 'myposts'
   get "/users/likes", to: 'users#likes', as: 'likes'
@@ -30,4 +32,5 @@ Rails.application.routes.draw do
   resources :rooms, only: [:create, :index, :show]
   resources :notifications, only: :index
   resources :hashtags, only: :index
+  resources :searches, only: :index
 end

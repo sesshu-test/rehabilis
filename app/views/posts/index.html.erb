@@ -8,13 +8,6 @@
   <% end %>
 </div>
 
-<div class="search-form">
-  <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword %>
-    <%= f.submit "検索" %>
-  <% end %>
-</div>
-
-<div id="categorized-posts">
-  <%= render 'categorized_posts' %>
+<div class="categorized-posts">
+  <%= render 'shared/categorized_posts' %>
 </div>

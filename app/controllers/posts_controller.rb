@@ -31,12 +31,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def search
-    @keyword = params[:keyword]
-    @posts = Post.joins(:user, :rehabilitations).includes(:user, :rehabilitations).search(@keyword).page(params[:page])
-    render "index"
-  end
-
   def show
     @post = Post.find(params[:id])
     @likes = Like.where(post_id: @post.id) 
