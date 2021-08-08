@@ -5,9 +5,11 @@
   <%= link_to "グラフの切り替え", graph_path(id: @user.id, count_or_time: "count"), remote: true %>
   <h3>時間系のグラフ</h3>
 <% end %>
-
-<%= pie_chart @pie_chart_data if @pie_chart_data.presence %>
-
-<%= line_chart @line_chart_data.each { |line|
+<% if @pie_chart_data.presence %>
+  <%= pie_chart @pie_chart_data %>
+  <%= line_chart @line_chart_data.each { |line|
     {name: line[:name], data: line[:data]}
-} if @line_chart_data.presence %>
+  } %>
+<% else %>
+  <h4>no data</h4>
+<% end %>
