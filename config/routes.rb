@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  get "/posts/categorized_posts", to: 'posts#categorized_posts', as: 'categorized_posts'
   get "/searches/icon_click", to: 'searches#icon_click', as: 'searches_icon_click'
   get "/searches/posts", to: 'searches#posts', as: 'searches_posts'
   get "/searches/users", to: 'searches#users', as: 'searches_users'

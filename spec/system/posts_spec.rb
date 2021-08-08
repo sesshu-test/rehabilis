@@ -45,7 +45,7 @@ RSpec.describe Post, type: :system do
           find('input[name="commit"]').click
         end.to change { Post.count }.by(0)
         # 新規投稿ページへ戻される
-        expect(current_path).to eq '/posts'
+        expect(current_path).to eq "/posts"
       end
     end
   end

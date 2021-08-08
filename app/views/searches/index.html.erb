@@ -5,6 +5,6 @@
   <%= link_to "ユーザー", searches_users_path(keyword: @keyword), remote: true %>
 </div>
 
-<div id="search-results">
-  <%= render 'shared/categorized_posts' %>
+<div id="search-results" class="posts">
+  <%= render 'shared/posts' %>
 </div>

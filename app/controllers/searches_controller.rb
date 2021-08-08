@@ -5,7 +5,7 @@ class SearchesController < ApplicationController
   end
 
   def icon_click
-    @hashtags = Hashtag.joins(:post_hashtags).group(:hashtag_id).order('count(post_id) desc').includes(:posts)
+    @hashtags = Hashtag.joins(:post_hashtags).group(:hashtag_id).order('count(post_id) desc').includes(:posts).first(5)
     respond_to do |format|
       format.html { redirect_back(fallback_location: root_path) }
       format.js

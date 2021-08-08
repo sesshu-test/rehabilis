@@ -14,7 +14,7 @@
 </div>
 
 <div class="post-content">
-  <%= @post.impression %>
+  <%= impression_with_hashtags(@post.impression) %>
 
   <ul>
     <% @post.rehabilitations.each do |rehabilitation| %>

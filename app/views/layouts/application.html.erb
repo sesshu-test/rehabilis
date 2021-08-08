@@ -15,6 +15,7 @@
       <nav>
         <%= link_to 'ユーザー一覧', users_path %>
         <%= link_to 'ハッシュタグ一覧', hashtags_path %>
+        <%= link_to image_tag("search.svg", alt: "検索", width: "20px"), searches_icon_click_path, remote: true %>
         <% if user_signed_in? %>
           <%= link_to image_tag(display_avatar(current_user), size: "#{'50' if display_avatar(current_user).is_a?(String) }"), current_user %>
           <%= link_to image_tag("bell.svg", alt: "通知", width: "20px"), notifications_path %>
@@ -22,7 +23,6 @@
             <span>未読あり</span>
           <% end %>
           <%= link_to image_tag("mail.svg", alt: "DM", width: "20px"), rooms_path %>
-          <%= link_to image_tag("search.svg", alt: "DM", width: "20px"), searches_icon_click_path, remote: true %>
           <%= link_to '新規投稿', new_post_path %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
         <% else %>
