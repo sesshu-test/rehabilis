@@ -1,5 +1,6 @@
-<ul class="likes">
-  <h3>お気に入り</h3>
+<h3>お気に入り</h3>
+
+<ul>
   <% @liking_posts.each do |post| %>
     <li>
       <%= image_tag display_avatar(post.user), size: "#{'50' if display_avatar(post.user).is_a?(String) }" %>

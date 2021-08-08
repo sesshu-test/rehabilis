@@ -5,25 +5,7 @@ class PostsController < ApplicationController
   def index
     @hashtags = Hashtag.joins(:post_hashtags).group(:hashtag_id).order('count(post_id) desc').includes(:posts).first(5)
     if params[:name]
-      @category = params[:name]
-      if @category == 'timeline' && user_signed_in?
-        user_ids = current_user.following.pluck(:id) << current_user.id
-        @posts = Post.where(user_id: user_ids).includes(:user).page(params[:page])
-      #全ユーザの投稿一覧
-      elsif @category == 'all'
-        @posts = Post.includes(:user).page(params[:page])
-      #選択されたハッシュタグの投稿一覧
-      else
-        @hashtag = Hashtag.find_by(name: params[:name])
-        @posts = @hashtag.posts.includes(:user).page(params[:page])
-        if params[:from_hashtag] == 'true'
-          redirect_to root_path && return
-        end
-      end
-      respond_to do |format|
-        format.html { redirect_back(fallback_location: root_path) }
-        format.js
-      end
+      get_categorized_posts
     else
       @posts = Post.includes(:user).page(params[:page])
     end
@@ -61,7 +43,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    #create_hashtags
     if @post.save
       create_rehabilitations
       flash[:success] = "post created!"
@@ -82,12 +63,26 @@ class PostsController < ApplicationController
       params.permit(:impression, images: [])
     end
 
-    def create_hashtags
-      hashtags  = @post.impression.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
-      hashtags.uniq.map do |h|
-        @post.impression.slice!(h)
-        hashtag = Hashtag.find_or_create_by(name: h.downcase.delete('#'))
-        @post.hashtags << hashtag
+    def get_categorized_posts
+      @category = params[:name]
+      if @category == 'timeline'
+        redirect_to root_url unless user_signed_in?
+        user_ids = current_user.following.pluck(:id) << current_user.id
+        @posts = Post.where(user_id: user_ids).includes(:user).page(params[:page])
+      #全ユーザの投稿一覧
+      elsif @category == 'all'
+        @posts = Post.includes(:user).page(params[:page])
+      #選択されたハッシュタグの投稿一覧
+      else
+        @hashtag = Hashtag.find_by(name: params[:name])
+        @posts = @hashtag.posts.includes(:user).page(params[:page])
+        if params[:from_hashtag] == 'true'
+          render root_path && return
+        end
+      end
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
       end
     end
 
@@ -96,6 +91,8 @@ class PostsController < ApplicationController
         params[:rehabilitations].keys.each do |key|
           @post.rehabilitations.create(params.require("rehabilitations").require(key).permit(:name, :time, :count))
         end
+      else
+        redirect_to root_url
       end
     end
 

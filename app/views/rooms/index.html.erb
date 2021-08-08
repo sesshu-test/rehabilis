@@ -1,13 +1,15 @@
 <h1>DM一覧</h1>
 
-<ul class="rooms">
-  <% @another_entries.each do |entry| %>
-    <% if message ||= entry.room.messages.last %>
-      <li>
-        <%= link_to entry.user.name, user_path(entry.user) %>
-        <%= link_to message.content, room_path(entry.room) %>
-      </li>
+<div id="rooms">
+  <ul>
+    <% @another_entries.each do |entry| %>
+      <% if message ||= entry.room.messages.last %>
+        <li>
+          <%= link_to entry.user.name, user_path(entry.user) %>
+          <%= link_to message.content, room_path(entry.room) %>
+        </li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
+</div>
 

@@ -4,6 +4,6 @@
   <%= link_to "活動", activity_path, remote: true %>
 </div>
 
-<div class="notifications">
+<div id="notifications">
   <%= render 'notification' if @notifications.exists? %>
 </div>
