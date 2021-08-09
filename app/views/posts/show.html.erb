@@ -1,5 +1,5 @@
+<%= link_to image_tag("arrow.svg", alt: "戻る", width: "20px"), return_to_index_path %>
 <h1>投稿詳細</h1>
-
 <div class="user">
   <% @user = @post.user %>
   <% if @user.avatar.attached? %>

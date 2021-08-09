@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'posts#index'
+  get "/posts/erase_new_post_box", to: 'posts#erase_new_post_box', as: 'erase_new_post_box'
+  get "/posts/return_to_index", to: 'posts#return_to_index', as: 'return_to_index'
   get "/searches/icon_click", to: 'searches#icon_click', as: 'searches_icon_click'
+  get "/searches/erase_search_box", to: 'searches#erase_search_box', as: 'erase_search_box'
   get "/searches/posts", to: 'searches#posts', as: 'searches_posts'
   get "/searches/users", to: 'searches#users', as: 'searches_users'
   #get "/posts/new_rehabilitation", to: 'posts#new_rehabilitation', as: 'new_rehabilitation'
