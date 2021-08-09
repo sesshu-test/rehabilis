@@ -63,7 +63,7 @@ class PostsController < ApplicationController
       flash[:success] = "post created!"
       redirect_to root_url
     else
-      render 'posts/new'
+      redirect_to root_url
     end
   end
 

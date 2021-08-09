@@ -7,7 +7,7 @@ RSpec.describe 'コメント', type: :system do
   let(:user) { create(:user) }
   let(:post) { create(:post) }
   let(:comment) { create(:comment) }
-  it 'ログインしたユーザーはツイート詳細ページでコメントを投稿し、それをできる' do
+  it 'ログインしたユーザーはツイート詳細ページでコメントを投稿し、それを削除できる' do
     # ログインする
     signIn(user)
     # 投稿詳細ページに遷移する
@@ -16,13 +16,13 @@ RSpec.describe 'コメント', type: :system do
     fill_in 'comment_content', with: comment.content
     # コメントを送信するとページにコメントが表示され、Commentモデルのカウントが1上がる
     expect  do
-      find('input[value="Comment"]').click
+      click_button 'Comment'
       expect(page).to have_content(comment.content)
     end.to change {Comment.count}.by(1)
     # コメントを削除すると、Commentモデルのカウントが1下がる
     expect do
       accept_alert do
-        find_link('削除').click
+        click_link '削除'
       end
       sleep 1
     end.to change { Comment.count }.by(-1)

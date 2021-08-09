@@ -26,14 +26,15 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "GET /new" do
-    it "ログインしていれば、新規投稿ページのアクセスが成功" do
-      # ログインせずに新規投稿に遷移
-      get "/posts/new"
-      expect(response).to redirect_to(new_user_session_path)
-      # ログインして新規投稿に遷移
+    it "ログインしていれば、新規投稿のリンクがある" do
+      get "/"
+      # 新規投稿のリンクがない
+      expect(response.body).not_to include '新規投稿'
+      # ログイン
       sign_in user
-      get "/posts/new"
-      expect(response).to have_http_status(:success)
+      # 新規投稿のリンクがある
+      get "/"
+      expect(response.body).to include '新規投稿'
     end
   end
 

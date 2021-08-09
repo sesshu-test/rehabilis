@@ -9,8 +9,10 @@ RSpec.describe Post, type: :system do
       it 'ログインしたユーザーは新規投稿できる' do
         # ログインする
         signIn(user)
-        # 新規投稿ページへ遷移する
-        visit new_post_path
+        # 投稿一覧ページへ遷移する
+        visit root_path
+        # 新規投稿ボタンを押す
+        click_link '新規投稿'
         # フォームに情報を入力する
         click_button '回数系'
         fill_in 'rehabilitations_name', with: rehabilitation.name
@@ -18,7 +20,7 @@ RSpec.describe Post, type: :system do
         fill_in 'impression', with: rehabilitation.post.impression
         # 投稿するとPostモデルのカウントが1上がる
         expect  do
-          find('input[name="commit"]').click
+          click_button 'Post'
         end.to change { Post.count }.by(1)
         # トップページに遷移する
         expect(current_path).to eq root_path
@@ -35,17 +37,37 @@ RSpec.describe Post, type: :system do
         # ログインする
         signIn(user)
         # 新規投稿ページへ遷移する
-        visit new_post_path
+        visit root_path
+        # 
+        click_link '新規投稿'
         # フォームに情報を入力する
         click_button '回数系'
         fill_in 'rehabilitations_name', with: nil
         fill_in 'rehabilitations_count', with: nil
         fill_in 'impression', with: nil
         expect  do
-          find('input[name="commit"]').click
+          click_button 'Post'
         end.to change { Post.count }.by(0)
         # 新規投稿ページへ戻される
-        expect(current_path).to eq "/posts"
+        expect(current_path).to eq root_path
+      end
+    end
+    describe '新規投稿ボックス' do
+      it '新規投稿アイコンを押すと新規投稿ボックスが挿入され、✖︎アイコンを押すと新規投稿ボックスが閉じる' do
+        # ログインする
+        signIn(user)
+        # 投稿一覧ページへ遷移する
+        visit root_path
+        # 新規投稿フォームがない
+        expect(page).to have_no_selector 'form'
+        # 新規投稿ボタンを押す
+        click_link '新規投稿'
+        # 新規投稿フォームがある
+        expect(page).to have_selector 'form'
+        # ✖︎アイコンを押す
+        click_link '閉じる'
+        # 新規投稿フォームがない
+        expect(page).to have_no_selector 'form'
       end
     end
   end
@@ -61,11 +83,13 @@ RSpec.describe Post, type: :system do
         visit post_path(post1)
         # 投稿を削除するとレコードの数が1減る
         expect do
-          find_link('削除').click
-          page.driver.browser.switch_to.alert.accept
-          # トップページに遷移する
-          expect(current_path).to eq root_path
+          accept_alert do
+            click_link '削除'
+          end
+          sleep 1
         end.to change { Post.count }.by(-1)
+        # トップページに遷移する
+        expect(current_path).to eq root_path
       end
     end
     context '投稿の削除ができないとき' do
@@ -99,12 +123,18 @@ RSpec.describe Post, type: :system do
       expect(page).to have_selector 'form'
     end
     it 'ログインしていない状態では、投稿詳細ページに遷移できるものの、コメント投稿欄が表示されない' do
-      # トップページに移動する
-      visit root_path
       # 投稿の文章をクリックし、投稿詳細ページへ遷移する
       visit post_path(post)
       # コメント用のフォームが存在しない
       expect(page).to have_no_selector 'form'
+    end
+    it 'リターンアイコンを押すと投稿一覧が表示される' do
+      # 投稿詳細ページへ遷移する
+      visit post_path(post)
+      # リターンアイコンを押して一瞬待つ
+      click_link '戻る'
+      sleep 1
+      expect(current_path).to eq posts_path
     end
   end
 

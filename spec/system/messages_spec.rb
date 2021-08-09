@@ -13,7 +13,7 @@ RSpec.describe 'メッセージ', type: :system do
       # メッセージを送る相手のユーザ詳細ページに遷移する
       visit user_path(other_user)
       # ボタンを押してチャットルームに遷移する
-      click_button 'チャットを始める'
+      click_button 'DM'
       expect(page).to have_field 'メッセージを入力して下さい'
       # メッセージを送信するとチャットルーム内に表示され、Messageモデルのカウントが１上がる
       fill_in 'メッセージを入力して下さい', with: test_message
@@ -25,7 +25,7 @@ RSpec.describe 'メッセージ', type: :system do
       visit rooms_path
       expect(page).to have_content test_message
       # ログアウトする
-      find_link('ログアウト').click
+      click_link 'ログアウト'
       expect(current_path).to eq root_path
       # 受信側のユーザでログインする
       signIn(other_user)
@@ -34,7 +34,7 @@ RSpec.describe 'メッセージ', type: :system do
       expect(page).to have_content test_message
       # DM一覧で受信したメッセージのリンクを踏むと、チャットールームに遷移する
       visit rooms_path
-      find_link(test_message).click
+      click_link test_message
       expect(page).to have_content(test_message)
       expect(page).to have_field 'メッセージを入力して下さい'
     end
@@ -42,7 +42,7 @@ RSpec.describe 'メッセージ', type: :system do
       # メッセージを送る相手のユーザ詳細ページに遷移する
       visit user_path(other_user)
       # チャットルームへのリンクがない
-      expect(page).to have_no_content('チャットを始める')
+      expect(page).to have_no_content('mail')
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe 'メッセージ', type: :system do
       # メッセージを送る相手のユーザ詳細ページに遷移する
       visit user_path(other_user)
       # ボタンを押してチャットルームに遷移する
-      click_button 'チャットを始める'
+      click_button 'DM'
       expect(page).to have_field 'メッセージを入力して下さい'
       # メッセージを送信するとチャットルーム内に表示され、Messageモデルのカウントが１上がる
       fill_in 'メッセージを入力して下さい', with: test_message
@@ -77,7 +77,7 @@ RSpec.describe 'メッセージ', type: :system do
       # メッセージを送る相手のユーザ詳細ページに遷移する
       visit user_path(user)
       # ボタンを押してチャットルームに遷移する
-      click_button 'チャットを始める'
+      click_button 'DM'
       expect(page).to have_field 'メッセージを入力して下さい'
       # メッセージを送信するとチャットルーム内に表示され、Messageモデルのカウントが１上がる
       fill_in 'メッセージを入力して下さい', with: test_message
@@ -86,13 +86,13 @@ RSpec.describe 'メッセージ', type: :system do
         expect(page).to have_content test_message
       end.to change {Message.count}.by(1)
       # ログアウトする
-      find_link('ログアウト').click
+      click_link 'ログアウト'
       expect(current_path).to eq root_path
       # 受信側のユーザでログインする
       signIn(user)
       # DM一覧で受信したメッセージのリンクを踏むと、チャットールームに遷移する
       visit rooms_path
-      find_link(test_message).click
+      click_link test_message
       expect(page).to have_no_button '削除'
     end
   end

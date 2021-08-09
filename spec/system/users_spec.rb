@@ -18,9 +18,8 @@ RSpec.describe User, type: :system do
             fill_in 'Password confirmation', with: user.password
             # 新規登録ボタンを押すとUserモデルのカウントが1上がる
             expect  do
-              find('input[name="commit"]').click
+              click_button 'Sign up'
             end.to change { User.count }.by(1)
-            #expect(current_path).to eq root_path
           end
         end
         context 'メールアドレス未記入' do
@@ -34,7 +33,7 @@ RSpec.describe User, type: :system do
             fill_in 'Password confirmation', with: user.password
             # 新規登録ボタンを押してもUserモデルのカウントは上がらない
             expect  do
-              find('input[name="commit"]').click
+              click_button 'Sign up'
             end.to change { User.count }.by(0)
             # /usersへ移動する
             expect(current_path).to eq '/users'
@@ -53,7 +52,7 @@ RSpec.describe User, type: :system do
             fill_in 'Password confirmation', with: other_user.password
             # 新規登録ボタンを押してもUserモデルのカウントは上がらない
             expect  do
-              find('input[name="commit"]').click
+              click_button 'Sign up'
             end.to change { User.count }.by(0)
             # /usersへ移動する
             expect(current_path).to eq '/users'
@@ -74,7 +73,7 @@ RSpec.describe User, type: :system do
             fill_in 'Password', with: 'testTest'
             fill_in 'Password confirmation', with: 'testTest'
             fill_in 'Current password', with: other_user.password
-            find('input[name="commit"]').click
+            click_button 'Update'
             expect(current_path).to eq root_path
           end
         end
@@ -86,7 +85,7 @@ RSpec.describe User, type: :system do
             fill_in 'Password', with: 'testTest'
             fill_in 'Password confirmation', with: 'testTest'
             fill_in 'Current password', with: nil
-            find('input[name="commit"]').click
+            click_button 'Update'
             # /usersへ移動する
             expect(current_path).to eq '/users'
           end
