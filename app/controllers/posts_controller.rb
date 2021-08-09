@@ -18,10 +18,25 @@ class PostsController < ApplicationController
     @comment = Comment.new
   end
 
+  def return_to_index
+    redirect_to posts_url
+  end
+
   def new
     @post = Post.new
     @count_number = 0
     @time_number = 0
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
+  end
+
+  def erase_new_post_box
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
   end
 
   def new_rehabilitation
