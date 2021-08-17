@@ -1,8 +1,7 @@
 <h1>DM</h1>
 
-<h4>参加者</h4>
-<%= @another_entry.user.name %>
-<%= current_user.name %><hr>
+<h4>相手</h4>
+<%= @another_entry.user.name %><hr>
 
 <div id="message_area">
   <%= render 'messages/message_area' %>

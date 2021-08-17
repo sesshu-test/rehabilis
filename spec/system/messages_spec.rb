@@ -14,9 +14,9 @@ RSpec.describe 'メッセージ', type: :system do
       visit user_path(other_user)
       # ボタンを押してチャットルームに遷移する
       click_button 'DM'
-      expect(page).to have_field 'メッセージを入力して下さい'
+      expect(page).to have_field 'メッセージを入力'
       # メッセージを送信するとチャットルーム内に表示され、Messageモデルのカウントが１上がる
-      fill_in 'メッセージを入力して下さい', with: test_message
+      fill_in 'メッセージを入力', with: test_message
       expect  do
         click_button '送信'
         expect(page).to have_content test_message
@@ -36,7 +36,7 @@ RSpec.describe 'メッセージ', type: :system do
       visit rooms_path
       click_link test_message
       expect(page).to have_content(test_message)
-      expect(page).to have_field 'メッセージを入力して下さい'
+      expect(page).to have_field 'メッセージを入力'
     end
     it 'ログインしていないユーザは他人にメッセージを送信できない' do
       # メッセージを送る相手のユーザ詳細ページに遷移する
@@ -55,9 +55,9 @@ RSpec.describe 'メッセージ', type: :system do
       visit user_path(other_user)
       # ボタンを押してチャットルームに遷移する
       click_button 'DM'
-      expect(page).to have_field 'メッセージを入力して下さい'
+      expect(page).to have_field 'メッセージを入力'
       # メッセージを送信するとチャットルーム内に表示され、Messageモデルのカウントが１上がる
-      fill_in 'メッセージを入力して下さい', with: test_message
+      fill_in 'メッセージを入力', with: test_message
       expect  do
         click_button '送信'
         expect(page).to have_content test_message
@@ -78,9 +78,9 @@ RSpec.describe 'メッセージ', type: :system do
       visit user_path(user)
       # ボタンを押してチャットルームに遷移する
       click_button 'DM'
-      expect(page).to have_field 'メッセージを入力して下さい'
+      expect(page).to have_field 'メッセージを入力'
       # メッセージを送信するとチャットルーム内に表示され、Messageモデルのカウントが１上がる
-      fill_in 'メッセージを入力して下さい', with: test_message
+      fill_in 'メッセージを入力', with: test_message
       expect  do
         click_button '送信'
         expect(page).to have_content test_message

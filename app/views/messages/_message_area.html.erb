@@ -1,6 +1,9 @@
 <% if @messages.present? %>
   <% @messages.each do |message| %>
-    <%= link_to message.user.name, message.user %>
+    <%= link_to message.user do %>
+      <%= image_tag display_avatar(message.user), size: "#{'50' if display_avatar(message.user).is_a?(String) }" %>
+    <% end %>
+    <%#= link_to message.user.name, message.user %>
     <%= message.content %>
     <% if current_user?(message.user) %>
       <%= form_with(model: message, local: false, method: :delete, data: { confirm: '削除してよろしいですか？' }) do |f| %>

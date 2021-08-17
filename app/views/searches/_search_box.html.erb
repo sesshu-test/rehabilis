@@ -1,14 +1,17 @@
-<%= link_to image_tag("cross.svg", alt: "閉じる", width: "20px"), erase_search_box_path, remote: true %>
-
-<div class="search-form">
-  <%= form_with url: searches_url, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword %>
-    <%#= f.submit "検索" %>
-    <%= image_submit_tag("search.svg", alt: "検索", width: "20px") %>
-  <% end %>
+<div class="close-box">
+  <%= link_to image_tag("cross-white.svg", alt: "閉じる", width: "20px"), erase_search_box_path, remote: true, class: "close-box" %>
 </div>
 
-<h3>ハッシュタグ</h3>
-<div class="hashtags">
-  <%= render 'shared/hashtags' %>
+<div id="search-content">
+  <div id="search-form">
+    <%= form_with url: searches_url, method: :get, local: true do |f| %>
+      <%= f.text_field :keyword, value: @keyword %>
+      <%= image_submit_tag("search-white.svg", alt: "検索", width: "20px") %>
+    <% end %>
+  </div>
+
+  <h3>ハッシュタグ</h3>
+  <div class="hashtags">
+    <%= render 'shared/hashtags' %>
+  </div>
 </div>

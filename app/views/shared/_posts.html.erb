@@ -3,8 +3,8 @@
     <li>
       <%= image_tag display_avatar(post.user), size: "#{'50' if display_avatar(post.user).is_a?(String) }" %>
       <%= link_to post.user.name, post.user %>
-      <%= link_to post.impression, post %>
       <%= time_ago_in_words(post.created_at) %>
+      <%= link_to post.impression, post %>
     </li>
   <% end %>
 </ul>

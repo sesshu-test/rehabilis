@@ -20,7 +20,7 @@ RSpec.describe Post, type: :system do
         fill_in 'impression', with: rehabilitation.post.impression
         # 投稿するとPostモデルのカウントが1上がる
         expect  do
-          click_button 'Post'
+          click_button '投稿する'
         end.to change { Post.count }.by(1)
         # トップページに遷移する
         expect(current_path).to eq root_path
@@ -46,7 +46,7 @@ RSpec.describe Post, type: :system do
         fill_in 'rehabilitations_count', with: nil
         fill_in 'impression', with: nil
         expect  do
-          click_button 'Post'
+          click_button '投稿する'
         end.to change { Post.count }.by(0)
         # 新規投稿ページへ戻される
         expect(current_path).to eq root_path

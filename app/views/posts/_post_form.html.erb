@@ -2,8 +2,10 @@
   <div id="count-rehabilitation-form"></div>
   <div id="time-rehabilitation-form"></div>
 
+  <p>感想</p>
   <%= f.text_area :impression, placeholder: "例）頑張りました。" %>
+  <p>イメージ/画像</p>
   <%= f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png"%>
-  <%= f.submit "Post", class: "btn btn-primary" %>
+  <%= f.submit "投稿する", class: "btn btn-primary" %>
 <% end %>
 
