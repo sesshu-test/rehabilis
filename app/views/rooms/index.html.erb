@@ -4,9 +4,14 @@
   <ul>
     <% @another_entries.each do |entry| %>
       <% if message ||= entry.room.messages.last %>
-        <li>
-          <%= link_to entry.user.name, user_path(entry.user) %>
-          <%= link_to message.content, room_path(entry.room) %>
+        <li id="entry">
+          <%= link_to entry.user do %>
+            <%= image_tag display_avatar(entry.user), size: "#{'50' if display_avatar(entry.user).is_a?(String) }" %>
+          <% end %>
+          <div id="entry-right">
+            <%= link_to entry.user.name, user_path(entry.user) %>
+            <%= link_to message.content, room_path(entry.room), class:"message-content" %>
+          </div>
         </li>
       <% end %>
     <% end %>

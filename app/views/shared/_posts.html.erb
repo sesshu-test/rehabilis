@@ -1,10 +1,12 @@
 <ul>
   <% @posts.each do |post| %>
-    <li>
+    <li class="post">
       <%= image_tag display_avatar(post.user), size: "#{'50' if display_avatar(post.user).is_a?(String) }" %>
-      <%= link_to post.user.name, post.user %>
-      <%= time_ago_in_words(post.created_at) %>
-      <%= link_to post.impression, post %>
+      <div class="post-right">
+        <%= link_to post.user.name, post.user %>
+        <%= time_ago_in_words(post.created_at) %>
+        <%= link_to post.impression, post, class: "post-impression"%>
+      </div>
     </li>
   <% end %>
 </ul>

@@ -1,10 +1,13 @@
-<h1>DM</h1>
-
-<h4>相手</h4>
-<%= @another_entry.user.name %><hr>
-
-<div id="message_area">
-  <%= render 'messages/message_area' %>
+<div id="message-top">
+  <%= link_to "戻る", rooms_path %>
+  <%= @another_entry.user.name %>
 </div>
 
-<%= render 'messages/message_form' %>
+<div id="message-area">
+  <div id="messages">
+    <%= render 'messages/messages' %>
+  </div>
+  <div id="message-form">
+    <%= render 'messages/message_form' %>
+  </div>
+</div>

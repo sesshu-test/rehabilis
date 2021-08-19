@@ -1,12 +1,12 @@
 <h1>投稿一覧</h1>
 
-<div id="category-tab">
-  <%= link_to "タイムライン", root_path(name: "timeline"), remote: true if user_signed_in? %>
-  <%= link_to "全て", root_path(name: "all"), remote: true %>
+<ul id="category-tab">
+  <li><%= link_to "全て", root_path(name: "全て"), remote: true, class: "全て tab-active" %></li>
+  <li><%= link_to "タイムライン", root_path(name: "タイムライン"), remote: true, class: "タイムライン" if user_signed_in? %></li>
   <% @hashtags.each do |hashtag| %>
-    <%= link_to "##{hashtag.name} #{hashtag.posts.count}件", root_path(name: hashtag.name), remote: true %>
+    <li><%= link_to "##{hashtag.name} #{hashtag.posts.count}件", root_path(name: hashtag.name), remote: true, class: hashtag.name %></li>
   <% end %>
-</div>
+</ul>
 
 <div id="posts">
   <%= render 'shared/posts' %>

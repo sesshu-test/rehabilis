@@ -15,6 +15,17 @@
  *= require font-awesome
  */
 
+ /* universal */
+ul {
+  list-style: none;
+}
+
+/* typography */
+a {
+  text-decoration: none;
+  color: black;
+}
+
 #logo {
   width: 100px;
   display: block;

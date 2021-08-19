@@ -80,13 +80,14 @@ class PostsController < ApplicationController
 
     def get_categorized_posts
       @category = params[:name]
-      if @category == 'timeline'
+      #全ユーザの投稿一覧
+      if @category == '全て'
+        @posts = Post.includes(:user).page(params[:page])
+      #フォローしているユーザの投稿一覧
+      elsif @category == 'タイムライン'
         redirect_to root_url unless user_signed_in?
         user_ids = current_user.following.pluck(:id) << current_user.id
         @posts = Post.where(user_id: user_ids).includes(:user).page(params[:page])
-      #全ユーザの投稿一覧
-      elsif @category == 'all'
-        @posts = Post.includes(:user).page(params[:page])
       #選択されたハッシュタグの投稿一覧
       else
         @hashtag = Hashtag.find_by(name: params[:name])

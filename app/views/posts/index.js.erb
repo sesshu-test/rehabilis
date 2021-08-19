@@ -1,1 +1,5 @@
 $("#posts").html("<%= escape_javascript(render( 'shared/posts')) %>");
+
+var className = "<%= escape_javascript(@category) %>"
+$('.tab-active').removeClass('tab-active');
+$(`.${className}`).addClass('tab-active');
