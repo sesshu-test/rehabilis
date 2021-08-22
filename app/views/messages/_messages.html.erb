@@ -1,6 +1,6 @@
 <% if @messages.present? %>
   <% @messages.each do |message| %>
-    <div id="message">
+    <div id="message" class="<%= current_user?(message.user) ? "my_message" : "other's_message" %>">
       <%= link_to message.user do %>
         <%= image_tag display_avatar(message.user), size: "#{'50' if display_avatar(message.user).is_a?(String) }" %>
       <% end %>

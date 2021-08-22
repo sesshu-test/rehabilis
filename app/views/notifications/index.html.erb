@@ -1,9 +1,0 @@
-<h1>通知</h1>
-<div id="notifications-tab">
-  <%= link_to "通知", notification_path, remote: true %>
-  <%= link_to "活動", activity_path, remote: true %>
-</div>
-
-<div id="notifications">
-  <%= render 'notification' if @notifications.exists? %>
-</div>

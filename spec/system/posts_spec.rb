@@ -12,7 +12,7 @@ RSpec.describe Post, type: :system do
         # 投稿一覧ページへ遷移する
         visit root_path
         # 新規投稿ボタンを押す
-        click_link '新規投稿'
+        click_link '＋'
         # フォームに情報を入力する
         click_button '回数系'
         fill_in 'rehabilitations_name', with: rehabilitation.name
@@ -31,7 +31,7 @@ RSpec.describe Post, type: :system do
         # トップページに遷移する
         visit root_path
         # 新規投稿ページへのリンクがない
-        expect(page).to have_no_content('新規投稿')
+        expect(page).to have_no_content('＋')
       end
       it '投稿内容が空だと投稿できない' do
         # ログインする
@@ -39,7 +39,7 @@ RSpec.describe Post, type: :system do
         # 新規投稿ページへ遷移する
         visit root_path
         # 
-        click_link '新規投稿'
+        click_link '＋'
         # フォームに情報を入力する
         click_button '回数系'
         fill_in 'rehabilitations_name', with: nil
@@ -61,11 +61,11 @@ RSpec.describe Post, type: :system do
         # 新規投稿フォームがない
         expect(page).to have_no_selector 'form'
         # 新規投稿ボタンを押す
-        click_link '新規投稿'
+        click_link '＋'
         # 新規投稿フォームがある
         expect(page).to have_selector 'form'
         # ✖︎アイコンを押す
-        click_link '閉じる'
+        click_button '閉じる'
         # 新規投稿フォームがない
         expect(page).to have_no_selector 'form'
       end

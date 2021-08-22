@@ -2,16 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+@import "settings";
+
 #search-box {
   background:rgba(65,191,155,0.5);
   position: fixed;
   width: 30%;
   margin-left: 35%;
-  .close-box {
-    text-align: right;
+  .close-box-btn {
+    @include close-box-btn
   }
   #search-content {
     padding: 0px 10%;
+    margin-top: 10px;
     #search-form {
       text-align: center;
     }

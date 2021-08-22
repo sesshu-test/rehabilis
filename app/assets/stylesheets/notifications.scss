@@ -1,3 +1,49 @@
 // Place all the styles related to the notifications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+@import "settings";
+
+#notifications-box {
+  width: 400px;
+  right: 100px;
+  position: fixed;
+  #notifications-border {
+    border: solid;
+    border-color: $light-emerald-green;
+    border-width: 2px;
+    border-radius: 30px 0px 30px 30px;
+    box-shadow: 0 0 20px rgb(161, 161, 161);
+    background-color: white;
+    .close-box-btn {
+      @include close-box-btn
+    }
+    #notifications-tab {
+      display: flex;
+      justify-content: center;
+      a, .line {
+        margin: 10px;
+      }
+      a {
+        height: 20px;
+        line-height: 20px;
+        font-weight: 100;
+      }
+      .line {
+        width: 2px;
+        background-color: black;
+      }
+      .tab-active {
+        font-weight: bold;
+        font-size: 20px;
+        border-bottom: solid;
+        border-color: $light-emerald-green;
+      }
+    }
+    #notification_or_activity {
+      li {
+        margin: 10px 0;
+      }
+    }
+  }
+}

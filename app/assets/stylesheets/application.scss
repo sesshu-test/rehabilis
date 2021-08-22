@@ -31,3 +31,24 @@ a {
   display: block;
   margin: auto;
 }
+
+#bell-icon {
+  display: inline-block;
+  position: relative;
+  .circle {
+    position: absolute;
+    top: 1px;
+    left: 20px;
+    $circle-size: 15px;
+    display: inline-block;
+    width: $circle-size;
+    height: $circle-size;
+    border-radius: $circle-size;
+    background-color: orange;
+    color: white;
+    text-align: center;
+    line-height: $circle-size;
+    font-size: 10px;
+    font-weight: bold;
+  }
+}

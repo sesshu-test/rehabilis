@@ -18,4 +18,9 @@ module NotificationsHelper
   def unchecked_notifications
     @notifications = current_user.passive_notifications.where(checked: false)
   end
+
+  def unchecked_notifications_count
+    count = unchecked_notifications.count
+    count > 99 ? 99 : count
+  end
 end

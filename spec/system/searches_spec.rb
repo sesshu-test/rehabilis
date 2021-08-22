@@ -13,7 +13,7 @@ RSpec.describe '検索', type: :system do
     # 検索フォームがある
     expect(page).to have_selector 'form'
     # ✖︎アイコンを押す
-    click_link '閉じる'
+    click_button '閉じる'
     # 検索フォームがない
     expect(page).to have_no_selector 'form'
   end
@@ -24,7 +24,6 @@ RSpec.describe '検索', type: :system do
     click_link '検索'
     # 検索フォームに投稿の感想を入力し、検索
     fill_in 'keyword', with: post.impression
-    #find('input[name="commit"]').click
     click_button '検索'
     # 検索結果ページが表示される
     expect(current_path).to eq searches_path

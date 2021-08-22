@@ -1,2 +1,4 @@
-$("#notifications").html("<%= escape_javascript(render( 'notifications/activity')) %>");
-$("h1").html("活動");
+$("#notification_or_activity").html("<%= escape_javascript(render( 'notifications/activity')) %>");
+
+$("#notifications-tab .tab-active").removeClass('tab-active');
+$(".tab-activity").addClass('tab-active');

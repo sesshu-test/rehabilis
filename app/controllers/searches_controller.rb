@@ -12,13 +12,6 @@ class SearchesController < ApplicationController
     end
   end
 
-  def erase_search_box
-    respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path) }
-      format.js
-    end
-  end
-
   def posts
     @keyword = params[:keyword]
     @posts = Post.joins(:user, :rehabilitations).includes(:user, :rehabilitations).search_posts(@keyword).page(params[:page])
