@@ -30,7 +30,7 @@ RSpec.describe 'メッセージ', type: :system do
       # 受信側のユーザでログインする
       signIn(other_user)
       # 通知一覧に受信したメッセージが表示される
-      visit notifications_path
+      click_on '通知'
       expect(page).to have_content test_message
       # DM一覧で受信したメッセージのリンクを踏むと、チャットールームに遷移する
       visit rooms_path

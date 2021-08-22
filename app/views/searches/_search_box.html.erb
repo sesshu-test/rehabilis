@@ -1,6 +1,6 @@
-<div class="close-box">
-  <%= link_to image_tag("cross-white.svg", alt: "閉じる", width: "20px"), erase_search_box_path, remote: true, class: "close-box" %>
-</div>
+<%= render 'scripts/erase_box' %>
+
+<button class="close-box-btn"><%= image_tag("cross-white.svg", alt: "閉じる", width: "20px") %></button>
 
 <div id="search-content">
   <div id="search-form">

@@ -15,15 +15,17 @@
       <nav>
         <%= link_to 'ユーザー一覧', users_path %>
         <%= link_to 'ハッシュタグ一覧', hashtags_path %>
-        <%= link_to image_tag("search.svg", alt: "検索", width: "20px"), searches_icon_click_path, remote: true %>
+        <%= link_to image_tag("search.svg", alt: "検索", width: "30px"), searches_icon_click_path, remote: true %>
         <% if user_signed_in? %>
           <%= link_to image_tag(display_avatar(current_user), size: "#{'50' if display_avatar(current_user).is_a?(String) }"), current_user %>
-          <%= link_to image_tag("bell.svg", alt: "通知", width: "20px"), notifications_path %>
-          <% if unchecked_notifications.any? %>
-            <span>未読あり</span>
-          <% end %>
-          <%= link_to image_tag("mail.svg", alt: "DM", width: "20px"), rooms_path %>
-          <%= link_to '新規投稿', new_post_path, remote: true %>
+          <div id="bell-icon">
+            <%= link_to image_tag("bell.svg", alt: "通知", width: "30px"), notifications_path, remote: true %>
+            <% if unchecked_notifications.any? %>
+              <div class="circle" id="unchecked_notifications"><%= unchecked_notifications_count %></div>
+            <% end %>
+          </div>
+          <%= link_to image_tag("mail.svg", alt: "DM", width: "30px"), rooms_path %>
+          <%#= link_to '新規投稿', new_post_path, remote: true %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to 'ログイン', new_user_session_path %>
@@ -36,6 +38,12 @@
     
     <div id="search-box"></div>
     <div id="new-post-box"></div>
+    <div id="notifications-box"></div>
+    <% if user_signed_in? %>
+      <button id="new-post-button">
+        <%= link_to '＋', new_post_path, remote: true %>
+      </button>
+    <% end %>
 
     <%= yield %>
 

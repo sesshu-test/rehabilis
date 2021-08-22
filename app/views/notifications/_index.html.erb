@@ -1,0 +1,14 @@
+<%= render 'scripts/erase_box' %>
+
+<div id="notifications-border">
+  <button class="close-box-btn"><%= image_tag("cross.svg", alt: "閉じる", width: "20px") %></button>
+  <div id="notifications-tab">
+    <%= link_to "通知", notification_path, remote: true, class:"tab-notification tab-active" %>
+    <div class="line"></div>
+    <%= link_to "活動", activity_path, remote: true, class:"tab-activity" %>
+  </div>
+
+  <div id="notification_or_activity">
+    <%= render 'notification' if @notifications.exists? %>
+  </div>
+</div>

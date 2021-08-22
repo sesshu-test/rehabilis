@@ -2,13 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+@import "settings";
+
+#new-post-button {
+  //display: block;
+  width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 0px 30px 30px 30px;
+  background-color: $light-emerald-green;
+  cursor: pointer;
+  position: fixed;
+  //margin-left: auto;
+  right: 10%;
+  bottom: 10%;
+  a {
+    font-size: 80px;
+    color: white;
+  }
+}
+
 #new-post-box {
   background:rgba(65,191,155,0.5);
   position: fixed;
   width: 50%;
   margin-left: 25%;
-  .close-box {
-    text-align: right;
+  .close-box-btn {
+    @include close-box-btn
   }
   #new-post-content {
     padding: 0 20%;
@@ -16,24 +36,7 @@
 }
 
 #category-tab {
-  overflow: hidden;
-  li {
-    float: left;
-    margin: 10px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    a {
-      color: rgb(23, 92, 78);
-      //text-shadow: 0.1px 0.1px 0 rgb(68, 240, 207), -0.1px 0.1px 0 rgb(68, 240, 207), 0.1px -0.1px 0 rgb(68, 240, 207), -0.1px -0.1px 0 rgb(68, 240, 207);
-    }
-  }
-  .tab-active {
-    font-weight: bold;
-    font-size: 20px;
-    border-bottom: solid;
-    border-color: rgb(65,191,155);
-  }
+  @include tab
 }
 
 #posts {

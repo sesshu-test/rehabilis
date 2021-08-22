@@ -1,0 +1,27 @@
+$light-emerald-green: rgb(68, 240, 207);
+
+@mixin tab {
+  display: flex;
+  li {
+    margin: 10px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    a {
+      color: rgb(16, 63, 54);
+    }
+  }
+  .tab-active {
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: solid;
+    border-color: $light-emerald-green;
+  }
+}
+
+@mixin close-box-btn {
+  margin: 10px;
+  float: right;
+  background: none;
+  border: none;
+}

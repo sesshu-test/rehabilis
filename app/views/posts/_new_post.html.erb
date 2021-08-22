@@ -1,11 +1,7 @@
-<%#= link_to "回数系", new_rehabilitation_path(count: "plus", count_number: @count_number, time_number: @time_number) %>
-<%#= link_to "時間系", new_rehabilitation_path(time: "plus", count_number: @count_number, time_number: @time_number) %>
+<%= render 'scripts/new_post' %>
+<%= render 'scripts/erase_box' %>
 
-<%= javascript_pack_tag 'posts/new' %>
-
-<div class="close-box">
-  <%= link_to image_tag("cross-white.svg", alt: "閉じる", width: "20px"), erase_new_post_box_path, remote: true %>
-</div>
+<button class="close-box-btn"><%= image_tag("cross-white.svg", alt: "閉じる", width: "20px") %></button>
 
 <div id="new-post-content">
   <p>リハビリフォームの追加</p>
