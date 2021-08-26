@@ -1,0 +1,8 @@
+<%= fields_for :ills do |i| %>
+  <% 3.times do |n| %>
+    <div class="field">
+      <%= i.label :ill %><br />
+      <%= i.text_field :ill, name: "ills[#{n}][name]", value: resource.ills.present? ? resource.ills[n].name : nil %>
+    </div>
+  <% end %>
+<% end %>
