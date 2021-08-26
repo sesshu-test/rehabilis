@@ -1,5 +1,4 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-<%= @text %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -40,6 +39,8 @@
   <div class="field">
     <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png"  %>
   </div>
+
+  <%= render 'ills_form'  %>
 
   <div class="actions">
     <%= f.submit "Update" %>

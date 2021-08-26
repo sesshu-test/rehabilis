@@ -25,6 +25,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if account_update_params[:avatar].present?
       resource.avatar.attach(account_update_params[:avatar])    
     end
+
+    update_ills
   end
 
   # DELETE /resource
@@ -50,7 +52,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :name, :avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :name, :avatar, :ills])
+  end
+
+  def update_ills
+    if resource.ills.present?
+      3.times do |n|
+        resource.ills[n].update(ills_params(n))
+      end
+    else
+      3.times do |n|
+        resource.ills.create(ills_params(n))
+      end 
+    end
+  end
+
+  def ills_params(n)
+    params.require(:ills).require(n.to_s).permit(:name)
   end
 
   # The path used after sign up.
