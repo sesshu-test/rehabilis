@@ -29,3 +29,26 @@
     }
   }
 }
+
+#search-tab {
+  display: flex;
+  justify-content: center;
+  a, .line {
+    margin: 10px;
+  }
+  a {
+    height: 20px;
+    line-height: 20px;
+    font-weight: 100;
+  }
+  .line {
+    width: 2px;
+    background-color: black;
+  }
+  .tab-active {
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: solid;
+    border-color: $light-emerald-green;
+  }
+}

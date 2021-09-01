@@ -1,8 +1,9 @@
 <h1>検索結果</h1>
 
-<div id="searches-tab">
-  <%= link_to "投稿", searches_posts_path(keyword: @keyword), remote: true %>
-  <%= link_to "ユーザー", searches_users_path(keyword: @keyword), remote: true %>
+<div id="search-tab">
+  <%= link_to "投稿", searches_posts_path(keyword: @keyword), remote: true, class: "search-posts tab-active" %>
+  <div class="line"></div>
+  <%= link_to "ユーザー", searches_users_path(keyword: @keyword), remote: true, class: "search-users" %>
 </div>
 
 <div id="search-results">

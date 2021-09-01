@@ -1,0 +1,8 @@
+<ul>
+  <% users.each do |user| %>
+    <li>
+      <%= image_tag display_avatar(user), size: "#{'50' if display_avatar(user).is_a?(String) }" %>
+      <%= link_to user.name, user %>
+    </li>
+  <% end %>
+</ul>

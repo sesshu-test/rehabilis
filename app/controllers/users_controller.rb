@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.page(params[:page])
+    @recommended_users = User.joins(:ills).includes(:ills).users_with_like_ill(current_user).where.not(id: current_user.id)
   end
 
   def following

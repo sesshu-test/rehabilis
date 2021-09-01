@@ -40,7 +40,14 @@
     <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png"  %>
   </div>
 
-  <%= render 'ills_form'  %>
+  <%= fields_for :ills do |i| %>
+    <% 3.times do |n| %>
+      <div class="field">
+        <%= i.label "怪我-#{n+1}" %><br />
+        <%= i.text_field :ill, name: "ills[#{n}][name]", value: resource.ills.present? ? resource.ills[n].name : nil, id: "ill-#{n+1}" %>
+      </div>
+    <% end %>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Update" %>

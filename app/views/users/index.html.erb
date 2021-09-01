@@ -1,12 +1,12 @@
 <h1>ユーザ一覧</h1>
 
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= image_tag display_avatar(user), size: "#{'50' if display_avatar(user).is_a?(String) }" %>
-      <%= link_to user.name, user %>
-    </li>
-  <% end %>
-</ul>
+<div id="users">
+  <%= render 'users', users: @users %>
+</div>
 
 <%= paginate @users %>
+
+<div id="recommended-user">
+  <p>おすすめユーザ</p>
+  <%= render 'users', users: @recommended_users if @recommended_users.present? %>
+</div>

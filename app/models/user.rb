@@ -28,6 +28,24 @@ class User < ApplicationRecord
   scope :search_users, ->(keyword) do
     where("name LIKE ?", "%#{keyword}%")
   end
+  scope :users_with_like_ill, ->(user) do
+    ill_names = []
+    user.ills.each_with_index do |ill, i| 
+      unless ill.name == nil
+        ill_names << ill.name
+      end
+    end
+    if ill_names.length == 1
+      where("ills.name LIKE ?", "%#{ill_names[0]}%")
+    elsif ill_names.length == 2
+      where("ills.name LIKE ?", "%#{ill_names[0]}%").
+        or(where("ills.name LIKE ?", "%#{ill_names[1]}%"))
+    elsif ill_names.length == 3
+      where("ills.name LIKE ?", "%#{ill_names[0]}%").
+        or(where("ills.name LIKE ?", "%#{ill_names[1]}%")).
+          or(where("ills.name LIKE ?", "%#{ill_names[2]}%"))
+    end
+  end
 
   # ユーザーをフォローする
   def follow(other_user)
