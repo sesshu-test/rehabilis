@@ -2,9 +2,10 @@
 
 <div id="profile">
   <p>ユーザ名：<%= @user.name %></p>
+  <%= @user.introduction if !@user.introduction.nil? %>
   <% if @user.ills.present? %>
     <% @user.ills.each do |ill| %>
-      <% if !ill.name.nil? %>
+      <% if ill.name.present? %>
         <li><%= ill.name %></li>
       <% end %>
     <% end %>
