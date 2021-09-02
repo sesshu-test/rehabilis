@@ -6,7 +6,13 @@
 
 <%= paginate @users %>
 
-<div id="recommended-user">
-  <p>おすすめユーザ</p>
-  <%= render 'users', users: @recommended_users if @recommended_users.present? %>
-</div>
+<% if user_signed_in? %>
+  <div id="recommended-user">
+    <% if @recommended_users.present? %>
+      <p>おすすめユーザ</p>
+      <%= render 'users', users: @recommended_users if @recommended_users.present? %>
+    <% else %>
+      <p>怪我・病気を入力すると、おすすめユーザを表示できます。</p>
+    <% end %>
+  </div>
+<% end %>

@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   validates :name, presence: true
+  validates :introduction, length: { maximum: 400 }
   validates :avatar,   content_type: { in: %w[image/jpeg image/gif image/png], message: "must be a valid image format" },
                       size:         { less_than: 5.megabytes, message: "should be less than 5MB" }
   scope :search_users, ->(keyword) do

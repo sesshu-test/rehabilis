@@ -74,6 +74,7 @@ RSpec.describe User, type: :system do
             fill_in 'Password confirmation', with: 'testTest'
             fill_in 'Current password', with: other_user.password
             fill_in 'ill-1', with: '靭帯損傷'
+            fill_in 'Introduction', with: 'よろしくお願いします。'
             click_button 'Update'
             expect(current_path).to eq root_path
           end
@@ -87,6 +88,7 @@ RSpec.describe User, type: :system do
             fill_in 'Password confirmation', with: 'testTest'
             fill_in 'Current password', with: nil
             fill_in 'ill-1', with: '靭帯損傷'
+            fill_in 'Introduction', with: 'よろしくお願いします。'
             click_button 'Update'
             # /usersへ移動する
             expect(current_path).to eq '/users'

@@ -15,6 +15,16 @@ RSpec.describe User, type: :model do
         expect(user).to be_valid
         expect(user.save).to be_truthy
       end
+      it "introductionが0文字の場合、保存できる" do
+        user.introduction = ""
+        expect(user).to be_valid
+        expect(user.save).to be_truthy
+      end
+      it "introductionが400文字以下の場合、保存できる" do
+        user.introduction = "a" * 400
+        expect(user).to be_valid
+        expect(user.save).to be_truthy
+      end
     end
 
     context "保存できない場合" do
@@ -45,7 +55,11 @@ RSpec.describe User, type: :model do
         expect(user).to be_invalid
         expect(user.save).to be_falsey
       end
+      it "introductionが401文字以上の場合、保存できない" do
+        user.introduction = "a" * 401
+        expect(user).to be_invalid
+        expect(user.save).to be_falsey
+      end
     end
   end
-
 end

@@ -9,7 +9,10 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.page(params[:page])
-    @recommended_users = User.joins(:ills).includes(:ills).users_with_like_ill(current_user).where.not(id: current_user.id)
+
+    if user_signed_in? && user_have_at_least_one_ill?(current_user)
+      @recommended_users = User.joins(:ills).includes(:ills).users_with_like_ill(current_user).where.not(id: current_user.id)
+    end
   end
 
   def following
@@ -116,6 +119,12 @@ class UsersController < ApplicationController
         @pie_chart_data[i].push(grouped_reha[0][0], count_sum)
         i += 1
       end
+    end
+  end
+
+  def user_have_at_least_one_ill?(user)
+    if user.ills.present?
+      user.ills[0].name.present? || user.ills[1].name.present? || user.ills[2].name.present?
     end
   end
 
