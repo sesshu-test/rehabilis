@@ -2,7 +2,11 @@
 
 <div id="profile">
   <p>ユーザ名：<%= @user.name %></p>
-  <%= @user.introduction if !@user.introduction.nil? %>
+  <% if @user.introduction.present? %>
+    <%= @user.introduction %>
+  <% else %>
+    <p>よろしくお願いします。</p>
+  <% end %>
   <% if @user.ills.present? %>
     <% @user.ills.each do |ill| %>
       <% if ill.name.present? %>
