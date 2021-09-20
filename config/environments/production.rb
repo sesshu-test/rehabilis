@@ -119,15 +119,8 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { host: 'peaceful-garden-75472.herokuapp.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    enable_starttls_auto: true,
-    port:                 587,
-    domain:               'gmail.com',
-    user_name:            'Gmail',
-    password:             'パスワード',
-    authentication:       :plain
-  }
+  # mailer
+  config.action_mailer.delivery_method = :ses
+  config.action_mailer.default_url_options = { host: 'rehabilis.site' }
+  config.action_mailer.raise_delivery_errors = true
 end
