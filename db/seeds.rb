@@ -5,7 +5,7 @@ User.create!(name:  "サンプル",
   confirmed_at: Time.now)
 
 # 追加のユーザーをまとめて生成する
-ills["骨折", "捻挫", "靭帯損傷", "肺炎"]
+ills = ["骨折", "捻挫", "靭帯損傷", "肺炎"]
 99.times do |n|
   name  = Gimei.first.katakana
   email = "example-#{n+1}@gmail.com"
