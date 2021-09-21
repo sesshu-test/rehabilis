@@ -28,8 +28,11 @@ rehabilitations_time = ["ランニング", "ジョギング", "ウォーキン�
     post = user.posts.create!(impression: impression)
     # ランダムにリハビリを作成
     random = rand(3)
-    rehabilitation = random % 2 == 1? rehabilitations_count[random] : rehabilitations_time[random] 
-    post.rehabilitations.create!(name: rehabilitation)
+    if random % 2 == 1
+      post.rehabilitations.create!(name: rehabilitations_count[random], count: rand(10..50))
+    else
+      post.rehabilitations.create!(name: rehabilitations_time[random], time: rand(10..50))
+    end
   end
 end
 
