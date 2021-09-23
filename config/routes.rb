@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/searches/icon_click", to: 'searches#icon_click', as: 'searches_icon_click'
   get "/searches/posts", to: 'searches#posts', as: 'searches_posts'
   get "/searches/users", to: 'searches#users', as: 'searches_users'
+  post "/users/guest_sign_in", to: 'users#guest_sign_in'
   get "/users/graph", to: 'users#graph', as: 'graph'
   get "/users/myposts", to: 'users#myposts', as: 'myposts'
   get "/users/likes", to: 'users#likes', as: 'likes'
@@ -14,8 +15,9 @@ Rails.application.routes.draw do
   
   #devise_for :users
   devise_for :users, :controllers => {
-    :registrations => 'users/registrations',
-    :sessions => 'users/sessions'   
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords'
   } 
   resources :users, only: [:index, :show] do
     member do
